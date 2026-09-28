@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel de Control — FENIX Durazno</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <link rel="stylesheet" href="css/estilos.css">
+  <style>
+    body { background-color: #F1F3F5; }
+    .admin-navbar {
+      background-color: var(--bg-dark);
+      color: #FFF;
+      padding: 1rem 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .admin-layout {
+      max-width: 1300px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 2rem;
+    }
+    .admin-sidebar {
+      background: #FFF;
+      border-radius: 16px;
+      padding: 1.5rem;
+      border: 1px solid var(--border-light);
+      height: fit-content;
+    }
+    .admin-menu { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+    .admin-menu a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0.8rem 1rem;
+      border-radius: 10px;
+      text-decoration: none;
+      color: var(--text-dark);
+      font-weight: 700;
+      font-size: 0.9rem;
+      transition: background 0.2s;
+    }
+    .admin-menu a.active, .admin-menu a:hover {
+      background: #F6F4EE;
+      color: var(--orange-primary);
+    }
+    .panel-card {
+      background: #FFF;
+      border: 1px solid var(--border-light);
+      border-radius: 16px;
+      padding: 1.8rem;
+      margin-bottom: 2rem;
+    }
+    .table-container { overflow-x: auto; margin-top: 1rem; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+    th { text-align: left; padding: 12px; background: #FAF9F6; color: var(--text-muted); font-weight: 700; border-bottom: 1px solid var(--border-light); }
+    td { padding: 12px; border-bottom: 1px solid #F0ECE1; vertical-align: middle; }
+    .btn-sm {
+      padding: 0.4rem 0.8rem;
+      font-size: 0.75rem;
+      border-radius: 6px;
+      border: none;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .btn-green { background: #E6F4EA; color: var(--green-status); }
+    .btn-orange { background: #FFECE8; color: var(--orange-primary); }
+    
+    @media (max-width: 900px) {
+      .admin-layout { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header de Administración -->
+  <header class="admin-navbar">
+    <div class="logo">
+      <div class="logo-icon"><i class="fa-solid fa-fire"></i></div>
+      <div class="logo-text">
+        <span class="brand-name" style="color:#FFF;">FENIX</span>
+        <span class="brand-sub" style="color:var(--yellow-primary);">COORDINACIÓN Y CONTROL</span>
+      </div>
+    </div>
+    <div style="display: flex; align-items: center; gap: 15px;">
+      <span style="font-size: 0.85rem; color: #8C9CAE;"><i class="fa-solid fa-user-shield"></i> Operador: <strong>CECOED Durazno</strong></span>
+      <a href="index.html" class="btn-topbar-emergencia"><i class="fa-solid fa-arrow-right-from-bracket"></i> Salir</a>
+    </div>
+  </header>
+
+  <div class="admin-layout">
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+      <ul class="admin-menu">
+        <li><a href="#" class="active"><i class="fa-solid fa-chart-line"></i> Resumen General</a></li>
+        <li><a href="#solicitudes"><i class="fa-solid fa-hand-holding-heart"></i> Solicitudes de Ayuda</a></li>
+        <li><a href="#refugios"><i class="fa-solid fa-building"></i> Estado de Refugios</a></li>
+        <li><a href="#donaciones"><i class="fa-solid fa-heart"></i> Recursos Ofrecidos</a></li>
+      </ul>
+    </aside>
+
+    <!-- Área Principal de Gestión -->
+    <main>
+      <!-- Metricas del Panel -->
+      <div class="panel-card">
+        <h2 class="title-condensed-sm" style="margin-bottom: 1.2rem;">ESTADO EN TIEMPO REAL</h2>
+        <div class="stats-counter-grid">
+          <div class="stat-box">
+            <i class="fa-solid fa-clock-rotate-left"></i>
+            <span class="stat-number" style="color: var(--orange-primary);">08</span>
+            <span class="stat-label">Pendientes de atención</span>
+          </div>
+          <div class="stat-box">
+            <i class="fa-solid fa-person-shelter"></i>
+            <span class="stat-number">91 / 190</span>
+            <span class="stat-label">Capacidad de refugios</span>
+          </div>
+          <div class="stat-box">
+            <i class="fa-solid fa-truck-ramp-box"></i>
+            <span class="stat-number">14</span>
+            <span class="stat-label">Ofertas de insumos</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabla de Solicitudes Recientes -->
+      <div class="panel-card" id="solicitudes">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+          <h3 class="title-condensed-sm">SOLICITUDES INGRESADAS</h3>
+          <span class="badge-tag" style="margin: 0;"><i class="fa-solid fa-circle"></i> ACTUALIZACIÓN EN VIVO</span>
+        </div>
+
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Fecha/Hora</th>
+                <th>Solicitante</th>
+                <th>Tipo de Ayuda</th>
+                <th>Ubicación</th>
+                <th>Estado</th>
+                <th>Acción</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Hace 5 min</td>
+                <td><strong>Ana Gómez</strong><br><small>099 888 777</small></td>
+                <td><span class="pill-status pill-orange">Traslado</span></td>
+                <td>Barrio Varona, Calle 4 #123</td>
+                <td><span class="pill-status pill-orange">Pendiente</span></td>
+                <td>
+                  <button class="btn-sm btn-green" onclick="alert('Asignando equipo de rescate...')">Atender</button>
+                </td>
+              </tr>
+              <tr>
+                <td>Hace 18 min</td>
+                <td><strong>Carlos Ruiz</strong><br><small>098 112 233</small></td>
+                <td><span class="pill-status pill-green">Alimentos / Agua</span></td>
+                <td>Cobusu, Pasaje B</td>
+                <td><span class="pill-status pill-green">En Proceso</span></td>
+                <td>
+                  <button class="btn-sm btn-orange" onclick="alert('Solicitud marcada como completada.')">Finalizar</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Gestión de Refugios -->
+      <div class="panel-card" id="refugios">
+        <h3 class="title-condensed-sm" style="margin-bottom: 1rem;">ACTUALIZAR CAPACIDAD DE REFUGIOS</h3>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Refugio</th>
+                <th>Ocupación Actual</th>
+                <th>Capacidad Max</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Club Centro Unión</strong></td>
+                <td><input type="number" value="34" style="width: 70px; padding: 4px; border-radius: 4px; border: 1px solid var(--border-light);"></td>
+                <td>60</td>
+                <td><button class="btn-sm btn-green" onclick="alert('Capacidad actualizada en el mapa público.')">Guardar</button></td>
+              </tr>
+              <tr>
+                <td><strong>Liceo N.° 1</strong></td>
+                <td><input type="number" value="12" style="width: 70px; padding: 4px; border-radius: 4px; border: 1px solid var(--border-light);"></td>
+                <td>80</td>
+                <td><button class="btn-sm btn-green" onclick="alert('Capacidad actualizada en el mapa público.')">Guardar</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+</body>
+</html>

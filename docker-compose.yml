@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  # Servicio de la aplicación Node.js + Express (Backend + Frontend estático)
+  web:
+    build: .
+    container_name: fenix_app
+    ports:
+      - "3000:3000"
+    environment:
+      PORT: 3000
+      DB_HOST: db
+      DB_USER: fenix_user
+      DB_PASSWORD: fenix_password123
+      DB_NAME: fenix_db
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    depends_on:
+      - db
+    restart: always
+
+  # Base de datos MySQL para persistencia completa
+  db:
+    image: mysql:8.0
+    container_name: fenix_mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password_123
+      MYSQL_DATABASE: fenix_db
+      MYSQL_USER: fenix_user
+      MYSQL_PASSWORD: fenix_password123
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  # Panel Web phpMyAdmin para gestionar la base de datos de la red
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: fenix_phpmyadmin
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORD: root_password_123
+    depends_on:
+      - db
+
+volumes:
+  mysql_data:

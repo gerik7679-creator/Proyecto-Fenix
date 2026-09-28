@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Página no encontrada — FENIX Durazno</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <link rel="stylesheet" href="css/estilos.css">
+  <style>
+    .error-page-wrapper {
+      min-height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 1rem;
+      text-align: center;
+    }
+    .error-card {
+      background: #FFF;
+      border: 1px solid var(--border-light);
+      border-radius: 24px;
+      padding: 3.5rem 2rem;
+      max-width: 580px;
+      width: 100%;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+    }
+    .error-code {
+      font-family: var(--font-condensed);
+      font-size: 8rem;
+      line-height: 0.8;
+      color: var(--orange-primary);
+      margin-bottom: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Topbar minimalista -->
+  <div class="topbar">
+    <div class="topbar-content">
+      <span class="status-indicator">
+        <span class="dot-pulse"></span>
+        <strong>RED ACTIVA · DURAZNO</strong>
+      </span>
+      <a href="tel:911" class="btn-topbar-emergencia">
+        <i class="fa-solid fa-phone"></i> EMERGENCIA 911
+      </a>
+    </div>
+  </div>
+
+  <main class="error-page-wrapper">
+    <div class="error-card">
+      <span class="badge-tag"><i class="fa-solid fa-triangle-exclamation"></i> ERROR DE NAVEGACIÓN</span>
+      <div class="error-code">404</div>
+      <h1 class="title-condensed-sm" style="color: var(--bg-dark); margin-bottom: 1rem;">UBICACIÓN FUERA DE RANGO</h1>
+      <p style="color: var(--text-muted); margin-bottom: 2rem; line-height: 1.5;">
+        La página que estás buscando no existe o fue reubicada durante la actualización de la red.
+      </p>
+      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+        <a href="index.html" class="btn-hero-orange">
+          <i class="fa-solid fa-house"></i> VOLVER AL INICIO
+        </a>
+        <a href="index.html#refugios" class="btn-hero-outline">
+          <i class="fa-solid fa-location-dot"></i> VER MAPA DE REFUGIOS
+        </a>
+      </div>
+    </div>
+  </main>
+
+</body>
+</html>
