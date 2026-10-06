@@ -1,20 +1,6 @@
-# Imagen oficial de Node.js ligera
-FROM node:20-alpine
-
-# Directorio de trabajo dentro del contenedor
-WORKDIR /usr/src/app
-
-# Copiar archivos de configuración de dependencias
-COPY package*.json ./
-
-# Instalar dependencias
-RUN npm install
-
-# Copiar el resto del código
-COPY . .
-
-# Expone el puerto configurado en Express
-EXPOSE 3000
-
-# Comando para ejecutar la aplicación
-CMD ["npm", "run", "dev"]
+FROM php:8.3-apache
+RUN docker-php-ext-install pdo_mysql && a2enmod rewrite headers
+ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
+RUN sed -i '/<Directory \/var\/www\/>/,/<\/Directory>/ s/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf
+    /etc/apache2/sites-available/*.conf /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
+COPY . /var/www/html/

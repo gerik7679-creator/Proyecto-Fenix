@@ -8,6 +8,7 @@
   --yellow-primary: #E0B034;
   --yellow-dark: #B88A14;
   --green-status: #10B981;
+  --red-status: #DC2626;
   --text-dark: #0F2137;
   --text-muted: #5A6A7D;
   --text-light: #F6F4EE;
@@ -27,6 +28,31 @@ html {
   font-family: var(--font-sans);
   background-color: var(--bg-cream);
   color: var(--text-dark);
+}
+
+body {
+  min-height: 100vh;
+}
+
+button, input, select, textarea {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+img { max-width: 100%; display: block; }
+
+:focus-visible {
+  outline: 3px solid var(--yellow-primary);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 /* --- UTILIDADES GENERALES --- */
@@ -69,6 +95,7 @@ html {
 }
 
 .badge-tag i { font-size: 0.5rem; }
+.badge-tag.tag-orange { color: var(--orange-primary); }
 
 /* --- TOPBAR & NAVBAR --- */
 .topbar {
@@ -85,6 +112,7 @@ html {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 1rem;
 }
 
 .status-indicator {
@@ -100,6 +128,7 @@ html {
   border-radius: 50%;
   box-shadow: 0 0 0 0 rgba(255, 85, 34, 0.7);
   animation: pulse 1.6s infinite;
+  flex-shrink: 0;
 }
 
 @keyframes pulse {
@@ -116,6 +145,7 @@ html {
   text-decoration: none;
   font-weight: 700;
   font-size: 0.75rem;
+  white-space: nowrap;
 }
 
 .navbar {
@@ -133,6 +163,7 @@ html {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 1rem;
 }
 
 .logo {
@@ -152,6 +183,7 @@ html {
   display: grid;
   place-items: center;
   font-size: 1.2rem;
+  flex-shrink: 0;
 }
 
 .brand-name {
@@ -197,6 +229,7 @@ html {
   align-items: center;
   gap: 8px;
   transition: background 0.2s;
+  white-space: nowrap;
 }
 
 .btn-nav-primary:hover { background-color: var(--orange-hover); }
@@ -234,6 +267,7 @@ html {
 .hero-actions {
   display: flex;
   gap: 1rem;
+  flex-wrap: wrap;
 }
 
 .btn-hero-orange {
@@ -247,13 +281,22 @@ html {
   cursor: pointer;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
+  text-decoration: none;
   transition: transform 0.2s, background 0.2s;
 }
 
 .btn-hero-orange:hover {
   background-color: var(--orange-hover);
   transform: translateY(-2px);
+}
+
+.btn-hero-orange:disabled,
+.btn-dark-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
 }
 
 .btn-hero-outline {
@@ -270,37 +313,43 @@ html {
   gap: 8px;
 }
 
+/* Tarjeta del hero: lista de refugios abiertos (sin mapa) */
 .hero-map-card {
-  position: relative;
-  height: 480px;
+  background: var(--bg-dark);
+  color: var(--text-light);
+  min-height: 320px;
   border-radius: 24px;
   overflow: hidden;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.06);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.12);
 }
 
-.map-container { width: 100%; height: 100%; }
+.hero-refugios {
+  padding: 1.8rem;
+  display: grid;
+  gap: 0.8rem;
+  align-content: start;
+}
 
-.map-overlay-badge {
-  position: absolute;
-  bottom: 20px;
-  left: 20px;
-  background: rgba(255,255,255,0.92);
-  backdrop-filter: blur(8px);
-  padding: 0.8rem 1.2rem;
-  border-radius: 12px;
+.hero-refugios h3 {
+  font-family: var(--font-condensed);
+  font-size: 1.8rem;
+  letter-spacing: 1px;
+  color: var(--yellow-primary);
+  margin-bottom: 0.4rem;
+}
+
+.hero-refugios p { color: #8C9CAE; }
+
+.hero-refugio-row {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 12px;
-  z-index: 400;
-  font-size: 0.85rem;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
-
-.live-dot {
-  width: 10px;
-  height: 10px;
-  background-color: var(--green-status);
-  border-radius: 50%;
+  gap: 1rem;
+  padding: 0.9rem 1.1rem;
+  background: #FFF;
+  color: var(--text-dark);
+  border-radius: 12px;
+  font-size: 0.9rem;
 }
 
 /* --- SECCIÓN OSCURA / DOS FORMAS --- */
@@ -392,20 +441,24 @@ html {
 .stat-number { font-size: 1.8rem; font-weight: 800; color: var(--bg-dark); }
 .stat-label { font-size: 0.75rem; color: var(--text-muted); font-weight: 600; }
 
-/* --- REFUGIOS --- */
+/* --- REFUGIOS (lista dinámica, sin mapa) --- */
 .section-refugios { padding: 5rem 0; }
 .refugios-header { margin-bottom: 2.5rem; }
 .refugios-sub { color: var(--text-muted); margin-top: 0.5rem; }
 
-.refugios-layout {
+.refugios-layout { display: block; }
+
+.refugios-cards-list {
   display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.2rem;
 }
 
-.refugios-map { height: 450px; border-radius: 20px; }
-
-.refugios-cards-list { display: flex; flex-direction: column; gap: 1rem; }
+.refugios-cards-list > p {
+  grid-column: 1 / -1;
+  color: var(--text-muted);
+  padding: 1rem 0;
+}
 
 .refugio-card {
   background: #FFF;
@@ -417,7 +470,13 @@ html {
   gap: 1rem;
 }
 
-.refugio-card-header { display: flex; justify-content: space-between; align-items: flex-start; }
+.refugio-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.8rem;
+}
+
 .refugio-title { font-size: 1.1rem; color: var(--bg-dark); }
 .refugio-address { font-size: 0.85rem; color: var(--text-muted); }
 
@@ -426,9 +485,11 @@ html {
   border-radius: 12px;
   font-size: 0.7rem;
   font-weight: 700;
+  white-space: nowrap;
 }
 .pill-orange { background: #FFECE8; color: var(--orange-primary); }
 .pill-green { background: #E6F4EA; color: var(--green-status); }
+.pill-red { background: #FDE8E8; color: var(--red-status); }
 
 .progress-track {
   width: 100%;
@@ -438,7 +499,11 @@ html {
   overflow: hidden;
   margin-top: 6px;
 }
-.progress-fill { height: 100%; background: var(--orange-primary); }
+.progress-fill {
+  height: 100%;
+  background: var(--orange-primary);
+  transition: width 0.4s ease;
+}
 .fill-green { background: var(--green-status); }
 
 .progress-label { display: flex; justify-content: space-between; font-size: 0.8rem; }
@@ -446,14 +511,17 @@ html {
 .refugio-card-footer {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   font-size: 0.8rem;
   color: var(--text-muted);
 }
 .btn-link { color: var(--orange-primary); font-weight: 700; text-decoration: none; }
+.btn-link:hover { text-decoration: underline; }
 
 /* --- CATEGORIAS & PEDIDOS --- */
 .section-pedidos { padding: 5rem 0; background: #EFECE6; }
 .pedidos-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 3rem; }
+.pedidos-info p { margin: 1rem 0 1.5rem; color: var(--text-muted); line-height: 1.5; }
 
 .categories-grid {
   display: grid;
@@ -475,9 +543,10 @@ html {
 .category-card h3 { font-family: var(--font-condensed); font-size: 1.6rem; }
 .category-card p { font-size: 0.85rem; color: var(--text-muted); }
 
-/* --- SECCIÓN SECTOR AMARILLO --- */
+/* --- SECCIÓN AMARILLA --- */
 .section-yellow { background-color: var(--yellow-primary); padding: 5rem 0; }
 .yellow-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+.yellow-info p { margin: 1rem 0 1.5rem; line-height: 1.5; }
 
 .btn-dark-primary {
   background-color: var(--bg-dark);
@@ -489,6 +558,7 @@ html {
   cursor: pointer;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
 }
 
@@ -541,7 +611,7 @@ html {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 140px;
+  min-height: 140px;
   transition: border-color 0.2s;
 }
 
@@ -556,6 +626,7 @@ html {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 1.5rem;
 }
 
 .footer-brand { display: flex; gap: 15px; align-items: center; }
@@ -565,22 +636,28 @@ html {
 /* --- MODALES --- */
 .modal-overlay {
   position: fixed;
-  top: 0; left: 0; width: 100%; height: 100%;
+  inset: 0;
   background: rgba(15, 33, 55, 0.7);
   backdrop-filter: blur(5px);
   display: none;
   place-items: center;
   z-index: 1000;
+  padding: 1rem;
+  overflow-y: auto;
 }
 
 .modal-body {
   background: #FFF;
   padding: 2.5rem;
   border-radius: 20px;
-  width: 90%;
+  width: 100%;
   max-width: 500px;
+  max-height: 92vh;
+  overflow-y: auto;
   position: relative;
 }
+
+.modal-body > p { color: var(--text-muted); margin: 0.6rem 0 1.5rem; line-height: 1.4; }
 
 .modal-close {
   position: absolute;
@@ -595,15 +672,40 @@ html {
   padding: 0.8rem; border: 1px solid var(--border-light);
   border-radius: 8px; font-family: inherit;
 }
+.form-group input:focus, .form-group select:focus {
+  border-color: var(--orange-primary);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255, 85, 34, 0.15);
+}
 
 /* --- RESPONSIVE --- */
 @media (max-width: 900px) {
-  .hero-grid, .dark-header-grid, .cards-duo-grid, .stats-bar, 
-  .refugios-layout, .pedidos-grid, .yellow-grid {
+  .hero-grid, .dark-header-grid, .cards-duo-grid, .stats-bar,
+  .pedidos-grid, .yellow-grid {
     grid-template-columns: 1fr;
   }
   .stats-counter-grid, .emergency-cards-grid {
     grid-template-columns: 1fr 1fr;
   }
   .nav-links { display: none; }
+  .section-dark, .section-refugios, .section-pedidos, .section-yellow { padding: 4rem 0; }
+}
+
+@media (max-width: 600px) {
+  .topbar { padding: 0.5rem 4%; }
+  .navbar { padding: 0.8rem 4%; }
+  .btn-nav-primary { padding: 0.55rem 0.9rem; font-size: 0.78rem; }
+  .brand-sub { display: none; }
+
+  .hero-actions { flex-direction: column; }
+  .hero-actions > * { width: 100%; justify-content: center; }
+
+  .categories-grid, .emergency-cards-grid { grid-template-columns: 1fr; }
+  .stats-counter-grid { grid-template-columns: 1fr 1fr; }
+
+  .action-card { padding: 1.8rem; }
+  .modal-body { padding: 1.8rem 1.4rem; }
+
+  .footer-bottom { flex-direction: column; align-items: flex-start; }
+  .footer-copy { text-align: left; }
 }
