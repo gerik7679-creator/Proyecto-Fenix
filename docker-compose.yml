@@ -1,51 +1,54 @@
-version: '3.8'
-
 services:
-  # Servicio de la aplicación Node.js + Express (Backend + Frontend estático)
   web:
     build: .
     container_name: fenix_app
     ports:
-      - "3000:3000"
+      - "3000:80"
     environment:
-      PORT: 3000
       DB_HOST: db
-      DB_USER: fenix_user
-      DB_PASSWORD: fenix_password123
-      DB_NAME: fenix_db
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_NAME}
+      TZ: America/Montevideo
     volumes:
-      - .:/usr/src/app
-      - /usr/src/app/node_modules
+      - .:/var/www/html
     depends_on:
-      - db
-    restart: always
+      db:
+        condition: service_healthy
+    restart: unless-stopped
 
-  # Base de datos MySQL para persistencia completa
   db:
     image: mysql:8.0
     container_name: fenix_mysql
-    restart: always
+    restart: unless-stopped
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     environment:
-      MYSQL_ROOT_PASSWORD: root_password_123
-      MYSQL_DATABASE: fenix_db
-      MYSQL_USER: fenix_user
-      MYSQL_PASSWORD: fenix_password123
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      TZ: America/Montevideo
     ports:
-      - "3307:3306"
+      - "127.0.0.1:3307:3306"
     volumes:
       - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -u root -p$$MYSQL_ROOT_PASSWORD --silent"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 20s
 
-  # Panel Web phpMyAdmin para gestionar la base de datos de la red
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     container_name: fenix_phpmyadmin
     ports:
-      - "8080:80"
+      - "127.0.0.1:8080:80"
     environment:
       PMA_HOST: db
-      MYSQL_ROOT_PASSWORD: root_password_123
     depends_on:
-      - db
+      db:
+        condition: service_healthy
 
 volumes:
   mysql_data:

@@ -1,455 +1,249 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FENIX — Red de Apoyo Durazno</title>
-  
-  <!-- Fuentes Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  
-  <!-- Iconos Lucide / FontAwesome y Leaflet CSS (Mapa) -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  
-  <link rel="stylesheet" href="public/css/estilos.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FENIX - Red de Apoyo Durazno</title>
+    <link rel="stylesheet" href="/css/estilos.css">
 </head>
+
 <body>
 
-  <!-- Topbar de Alerta -->
-  <div class="topbar">
-    <div class="topbar-content">
-      <span class="status-indicator">
-        <span class="dot-pulse"></span>
-        <strong>RED ACTIVA · DURAZNO</strong> &nbsp;Actualizada hace 4 min
-      </span>
-      <a href="tel:911" class="btn-topbar-emergencia">
-        <i class="fa-solid fa-phone"></i> EMERGENCIA 911
-      </a>
-    </div>
-  </div>
+    <header>
+        <h1>FENIX</h1>
+        <p>Red de Apoyo Durazno</p>
 
-  <!-- Header / Navbar Principal -->
-  <header class="navbar">
-    <div class="nav-container">
-      <a href="#" class="logo">
-        <div class="logo-icon"><i class="fa-solid fa-fire"></i></div>
-        <div class="logo-text">
-          <span class="brand-name">FENIX</span>
-          <span class="brand-sub">RED DE APOYO</span>
-        </div>
-      </a>
+        <nav>
+            <a href="#inicio">Inicio</a>
+            <a href="#ayuda">Necesito ayuda</a>
+            <a href="#donar">Quiero ayudar</a>
+            <a href="#refugios">Refugios</a>
+            <a href="#contacto">Contacto</a>
+        </nav>
+    </header>
 
-      <nav class="nav-links">
-        <a href="#inicio" class="active">Inicio</a>
-        <a href="#pedir-ayuda">Necesito ayuda</a>
-        <a href="#ofrecer-ayuda">Quiero donar</a>
-        <a href="#refugios">Mapa de refugios</a>
-        <a href="#contacto">Contacto</a>
-      </nav>
+    <main>
 
-      <a href="#pedir-ayuda" class="btn-nav-primary">
-        <i class="fa-solid fa-hand-holding-heart"></i> NECESITO AYUDA
-      </a>
-    </div>
-  </header>
+        <section id="inicio">
+            <h2>Unidos por Durazno</h2>
 
-  <main>
-    <!-- HERO SECTION -->
-    <section class="hero-section" id="inicio">
-      <div class="hero-grid">
-        <div class="hero-text">
-          <span class="badge-tag"><i class="fa-solid fa-circle"></i> RESPUESTA COMUNITARIA · 24/7</span>
-          <h1 class="hero-title">
-            UNIDOS<br>
-            <span class="text-orange">POR</span><br>
-            DURAZNO<span class="dot-yellow">.</span>
-          </h1>
-          <p class="hero-description">
-            Cuando el agua sube, nos organizamos. FENIX conecta a las personas afectadas con vecinos, recursos y refugios seguros en minutos.
-          </p>
-          <div class="hero-actions">
-            <button class="btn-hero-orange" onclick="openModal('modal-ayuda')">
-              <i class="fa-solid fa-hand-holding-heart"></i> NECESITO AYUDA &rarr;
-            </button>
-            <a href="#refugios" class="btn-hero-outline">
-              <i class="fa-solid fa-location-dot"></i> VER REFUGIOS
-            </a>
-          </div>
-        </div>
+            <p>
+                FENIX conecta a las personas afectadas con vecinos,
+                recursos y refugios seguros.
+            </p>
 
-        <!-- Card de Mapa Vivo -->
-        <div class="hero-map-card">
-          <div id="map-hero" class="map-container"></div>
-          <div class="map-overlay-badge">
-            <div class="live-dot"></div>
-            <div>
-              <strong>MAPA EN VIVO</strong><br>
-              <small>Durazno · Información verificada</small>
+            <a href="#ayuda">Necesito ayuda</a>
+            <a href="#refugios">Ver refugios</a>
+        </section>
+
+
+        <section>
+            <h2>Acá nadie está solo</h2>
+
+            <p>
+                Todos podemos necesitar ayuda o ayudar a otra persona.
+            </p>
+
+            <h3>Necesito ayuda</h3>
+
+            <p>
+                Pedí traslado, refugio, alimentos o asistencia.
+            </p>
+
+            <a href="#ayuda">Pedir ayuda</a>
+
+            <h3>Quiero ayudar</h3>
+
+            <p>
+                Podés colaborar con un vehículo, alimentos,
+                alojamiento o tu tiempo.
+            </p>
+
+            <a href="#donar">Quiero ayudar</a>
+        </section>
+
+
+        <section>
+            <h2>Situación actual</h2>
+
+            <p>Personas ayudando: <span id="counter-voluntarios">-</span></p>
+            <p>Refugios abiertos: <span id="counter-refugios">-</span></p>
+            <p>Pedidos atendidos: <span id="counter-pedidos">-</span></p>
+            <p>Última actualización: <span id="ultima-actualizacion">-</span></p>
+        </section>
+
+
+        <section id="refugios">
+            <h2>Refugios</h2>
+
+            <p>
+                Estos son los refugios disponibles.
+            </p>
+
+            <div id="lista-refugios">
+                <p>Cargando refugios...</p>
             </div>
-          </div>
-        </div>
-      </div>
-    </section>
+        </section>
 
-    <!-- SECCIÓN DOS FORMAS DE ESTAR -->
-    <section class="section-dark">
-      <div class="container">
-        <span class="badge-tag tag-orange"><i class="fa-solid fa-circle"></i> DOS FORMAS DE ESTAR</span>
-        <div class="dark-header-grid">
-          <h2 class="title-condensed">ACÁ, NADIE<br><span class="text-yellow">ESTÁ SOLO.</span></h2>
-          <p class="dark-lead">
-            Una red funciona cuando cada persona puede encontrar el apoyo que necesita —o poner sus manos, su tiempo y sus recursos al servicio de alguien más.
-          </p>
-        </div>
 
-        <div class="cards-duo-grid">
-          <!-- Card Necesito Ayuda -->
-          <div class="action-card card-orange" onclick="openModal('modal-ayuda')">
-            <div class="card-icon"><i class="fa-solid fa-life-ring"></i></div>
-            <span class="card-tag">SI ESTÁS EN UNA SITUACIÓN URGENTE</span>
-            <h3 class="card-title">NECESITO AYUDA</h3>
-            <p class="card-desc">Pedí traslado, refugio, alimentos o asistencia para tu hogar. Te conectamos con una persona del equipo.</p>
-            <div class="card-footer-action">
-              <span>01</span>
-              <i class="fa-solid fa-arrow-right"></i>
-            </div>
-          </div>
+        <section id="ayuda">
+            <h2>Necesito ayuda</h2>
 
-          <!-- Card Quiero Ayudar -->
-          <div class="action-card card-yellow" onclick="openModal('modal-donar')">
-            <div class="card-icon"><i class="fa-solid fa-heart"></i></div>
-            <span class="card-tag">SI PODÉS DAR UNA MANO</span>
-            <h3 class="card-title">QUIERO AYUDAR</h3>
-            <p class="card-desc">Sumá tu vehículo, un espacio, insumos o unas horas. Todo aporte cuenta cuando llega a tiempo.</p>
-            <div class="card-footer-action">
-              <span>02</span>
-              <i class="fa-solid fa-arrow-right"></i>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+            <p>
+                Contanos qué necesitás y nos pondremos en contacto.
+            </p>
 
-    <!-- METRICAS DE LA RED -->
-    <section class="section-stats">
-      <div class="container">
-        <div class="stats-bar">
-          <div class="stats-info">
-            <span class="badge-tag"><i class="fa-solid fa-circle"></i> SITUACIÓN AHORA</span>
-            <h2 class="title-condensed-sm">LA RED ESTÁ ACTIVA.</h2>
-            <p>Equipos vecinales coordinando en barrios de Durazno y zonas cercanas.</p>
-          </div>
-          <div class="stats-counter-grid">
-            <div class="stat-box">
-              <i class="fa-solid fa-users"></i>
-              <span class="stat-number" id="counter-voluntarios">18</span>
-              <span class="stat-label">personas ayudando</span>
-            </div>
-            <div class="stat-box">
-              <i class="fa-solid fa-house"></i>
-              <span class="stat-number">03</span>
-              <span class="stat-label">refugios abiertos</span>
-            </div>
-            <div class="stat-box">
-              <i class="fa-solid fa-circle-check"></i>
-              <span class="stat-number" id="counter-pedidos">47</span>
-              <span class="stat-label">pedidos atendidos</span>
-            </div>
-            <div class="stat-box">
-              <i class="fa-solid fa-clock"></i>
-              <span class="stat-number">04 min</span>
-              <span class="stat-label">última actualización</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+            <form id="form-ayuda"
+                  onsubmit="handleFormSubmit(event, 'Solicitud recibida. Te contactaremos pronto.')">
 
-    <!-- SECCIÓN REFUGIOS -->
-    <section class="section-refugios" id="refugios">
-      <div class="container">
-        <span class="badge-tag"><i class="fa-solid fa-circle"></i> MAPA DE REFUGIOS</span>
-        <div class="refugios-header">
-          <h2 class="title-condensed">ENCONTRÁ UN LUGAR<br>SEGURO.</h2>
-          <p class="refugios-sub">Espacios verificados por FENIX. Consultá la capacidad antes de trasladarte.<br><span class="text-green">● Actualización en tiempo real</span></p>
-        </div>
+                <label for="nombre-ayuda">Nombre</label>
+                <br>
+                <input
+                    type="text"
+                    id="nombre-ayuda"
+                    name="nombre"
+                    required
+                >
+                <br><br>
 
-        <div class="refugios-layout">
-          <div id="map-refugios-full" class="refugios-map"></div>
-          
-          <div class="refugios-cards-list">
-            <!-- Card Refugio 1 -->
-            <div class="refugio-card active">
-              <div class="refugio-card-header">
-                <div>
-                  <h3 class="refugio-title"><i class="fa-solid fa-building"></i> Club Centro Unión</h3>
-                  <p class="refugio-address">Manuel Oribe 117</p>
-                </div>
-                <span class="pill-status pill-orange">Recibiendo</span>
-              </div>
-              <div class="progress-bar-container">
-                <div class="progress-label">
-                  <span>Capacidad ocupada</span>
-                  <strong>34 / 60</strong>
-                </div>
-                <div class="progress-track"><div class="progress-fill" style="width: 56%;"></div></div>
-              </div>
-              <div class="refugio-card-footer">
-                <span><i class="fa-solid fa-location-arrow"></i> 0.8 km desde centro</span>
-                <a href="https://maps.google.com" target="_blank" class="btn-link">Cómo llegar &rarr;</a>
-              </div>
-            </div>
+                <label for="tel-ayuda">Teléfono</label>
+                <br>
+                <input
+                    type="tel"
+                    id="tel-ayuda"
+                    name="telefono"
+                    required
+                >
+                <br><br>
 
-            <!-- Card Refugio 2 -->
-            <div class="refugio-card">
-              <div class="refugio-card-header">
-                <div>
-                  <h3 class="refugio-title"><i class="fa-solid fa-graduation-cap"></i> Liceo N.° 1</h3>
-                  <p class="refugio-address">Rivera esq. 18 de Julio</p>
-                </div>
-                <span class="pill-status pill-green">Espacio disponible</span>
-              </div>
-              <div class="progress-bar-container">
-                <div class="progress-label">
-                  <span>Capacidad ocupada</span>
-                  <strong>12 / 80</strong>
-                </div>
-                <div class="progress-track"><div class="progress-fill fill-green" style="width: 15%;"></div></div>
-              </div>
-              <div class="refugio-card-footer">
-                <span><i class="fa-solid fa-location-arrow"></i> 1.2 km desde centro</span>
-                <a href="https://maps.google.com" target="_blank" class="btn-link">Cómo llegar &rarr;</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+                <label for="tipo-ayuda">Tipo de ayuda</label>
+                <br>
+                <select id="tipo-ayuda" name="tipo_ayuda" required>
+                    <option value="">Seleccionar</option>
+                    <option value="refugio">Refugio</option>
+                    <option value="traslado">Traslado</option>
+                    <option value="alimentos">Alimentos y agua</option>
+                    <option value="ropa">Ropa y frazadas</option>
+                    <option value="acompanamiento">Acompañamiento</option>
+                </select>
+                <br><br>
 
-    <!-- CATEGORÍAS DE PEDIDOS -->
-    <section class="section-pedidos" id="pedir-ayuda">
-      <div class="container">
-        <div class="pedidos-grid">
-          <div class="pedidos-info">
-            <span class="badge-tag"><i class="fa-solid fa-circle"></i> AYUDA CONCRETA, SIN VUELTAS</span>
-            <h2 class="title-condensed">PEDÍ LO QUE<br><span class="text-orange">NECESITÁS.</span></h2>
-            <p>No hace falta saber a quién llamar. Contanos qué está pasando y alguien de la red toma tu pedido.</p>
-            <button class="btn-hero-orange" onclick="openModal('modal-ayuda')">
-              <i class="fa-solid fa-paper-plane"></i> HACER UN PEDIDO
-            </button>
-          </div>
+                <label for="ubicacion-ayuda">Ubicación</label>
+                <br>
+                <input
+                    type="text"
+                    id="ubicacion-ayuda"
+                    name="ubicacion"
+                    required
+                >
+                <br><br>
 
-          <div class="categories-grid">
-            <div class="category-card" onclick="openModal('modal-ayuda')">
-              <div class="cat-icon"><i class="fa-solid fa-house-medical"></i></div>
-              <h3>REFUGIO</h3>
-              <p>Un lugar seguro para vos y tu familia.</p>
-            </div>
-            <div class="category-card" onclick="openModal('modal-ayuda')">
-              <div class="cat-icon"><i class="fa-solid fa-truck-droplet"></i></div>
-              <h3>TRASLADO</h3>
-              <p>Ayuda para salir de una zona de riesgo.</p>
-            </div>
-            <div class="category-card" onclick="openModal('modal-ayuda')">
-              <div class="cat-icon"><i class="fa-solid fa-utensils"></i></div>
-              <h3>ALIMENTOS</h3>
-              <p>Agua, comida y artículos de primera necesidad.</p>
-            </div>
-            <div class="category-card" onclick="openModal('modal-ayuda')">
-              <div class="cat-icon"><i class="fa-solid fa-handshake-angle"></i></div>
-              <h3>ACOMPAÑAMIENTO</h3>
-              <p>Una persona que te escuche y oriente.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+                <button type="submit">
+                    Enviar solicitud
+                </button>
 
-    <!-- SECCIÓN PONÉ TU TIEMPO -->
-    <section class="section-yellow" id="ofrecer-ayuda">
-      <div class="container">
-        <div class="yellow-grid">
-          <div class="yellow-info">
-            <span class="badge-tag"><i class="fa-solid fa-circle"></i> TU AYUDA LLEGA</span>
-            <h2 class="title-condensed">PONÉ TU<br>TIEMPO.</h2>
-            <p>Hay muchas maneras de colaborar: conducir, cocinar, prestar un espacio o acercar insumos. Elegí la que puedas hoy.</p>
-            <button class="btn-dark-primary" onclick="openModal('modal-donar')">
-              <i class="fa-solid fa-heart"></i> QUIERO OFRECER AYUDA
-            </button>
-          </div>
+            </form>
+        </section>
 
-          <div class="needs-list-card">
-            <div class="needs-card-header">
-              <span>LO MÁS NECESARIO HOY</span>
-              <i class="fa-solid fa-box-open"></i>
-            </div>
-            <ul class="needs-list">
-              <li onclick="openModal('modal-donar')">
-                <span class="num">01</span>
-                <span class="name">Agua potable</span>
-                <span class="count">18 pedidos &gt;</span>
-              </li>
-              <li onclick="openModal('modal-donar')">
-                <span class="num">02</span>
-                <span class="name">Frazadas</span>
-                <span class="count">11 pedidos &gt;</span>
-              </li>
-              <li onclick="openModal('modal-donar')">
-                <span class="num">03</span>
-                <span class="name">Transporte 4x4</span>
-                <span class="count">07 pedidos &gt;</span>
-              </li>
-              <li onclick="openModal('modal-donar')">
-                <span class="num">04</span>
-                <span class="name">Alimentos</span>
-                <span class="count">05 pedidos &gt;</span>
-              </li>
 
-              <li onclick="openModal('modal-donar')">
-                <span class="num">05</span>
-                <span class="name">Colchones</span>
-                <span class="count"> 15 pedidos &gt;</span>
-                </li>
+        <section id="donar">
+            <h2>Quiero ayudar</h2>
+
+            <p>
+                Registrá cómo podés colaborar.
+            </p>
+
+            <form id="form-donar"
+                  onsubmit="handleFormSubmit(event, '¡Gracias por tu apoyo! Nos comunicaremos a la brevedad.')">
+
+                <label for="nombre-donar">Nombre</label>
+                <br>
+                <input
+                    type="text"
+                    id="nombre-donar"
+                    name="nombre"
+                    required
+                >
+                <br><br>
+
+                <label for="tel-donar">Teléfono</label>
+                <br>
+                <input
+                    type="tel"
+                    id="tel-donar"
+                    name="telefono"
+                    required
+                >
+                <br><br>
+
+                <label for="tipo-donar">¿Cómo podés ayudar?</label>
+                <br>
+                <select id="tipo-donar" name="tipo" required>
+                    <option value="">Seleccionar</option>
+                    <option value="transporte">Vehículo / Traslado</option>
+                    <option value="insumos">Agua / Alimentos / Frazadas</option>
+                    <option value="alojamiento">Alojamiento</option>
+                    <option value="voluntario">Voluntario</option>
+                </select>
+                <br><br>
+
+                <button type="submit">
+                    Registrar mi ayuda
+                </button>
+
+            </form>
+        </section>
+
+
+        <section>
+            <h2>Lo que más se necesita</h2>
+
+            <ul>
+                <li>Agua potable</li>
+                <li>Frazadas</li>
+                <li>Transporte 4x4</li>
+                <li>Alimentos</li>
+                <li>Colchones</li>
             </ul>
-          </div>
-        </div>
-      </div>
-    </section>
+        </section>
 
-    <!-- FOOTER Y LLAMADAS DE EMERGENCIA -->
-    <footer class="footer-dark" id="contacto">
-      <div class="container">
-        <span class="badge-tag tag-orange"><i class="fa-solid fa-circle"></i> LLAMÁ SI ES URGENTE</span>
-        
-        <div class="emergency-cards-grid">
-          <a href="tel:911" class="emergency-card">
-            <div class="e-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
-            <div class="e-info">
-              <h3>911</h3>
-              <strong>Emergencias</strong>
-              <p>Policía / Bomberos / Ambulancia</p>
-            </div>
-            <i class="fa-solid fa-arrow-right e-arrow"></i>
-          </a>
+    </main>
 
-          <a href="tel:099555555" class="emergency-card">
-            <div class="e-icon"><i class="fa-solid fa-headset"></i></div>
-            <div class="e-info">
-              <h3>099 555 555</h3>
-              <strong>CECOED Durazno</strong>
-              <p>Coordinación departamental</p>
-            </div>
-            <i class="fa-solid fa-arrow-right e-arrow"></i>
-          </a>
 
-          <a href="tel:104" class="emergency-card">
-            <div class="e-icon"><i class="fa-solid fa-fire-extinguisher"></i></div>
-            <div class="e-info">
-              <h3>104</h3>
-              <strong>Bomberos</strong>
-              <p>Rescate e incendios</p>
-            </div>
-            <i class="fa-solid fa-arrow-right e-arrow"></i>
-          </a>
+    <footer id="contacto">
 
-          <a href="tel:911" class="emergency-card">
-            <div class="e-icon"><i class="fa-solid fa-shield-halved"></i></div>
-            <div class="e-info">
-              <h3>911</h3>
-              <strong>Policía</strong>
-              <p>Asistencia inmediata</p>
-            </div>
-            <i class="fa-solid fa-arrow-right e-arrow"></i>
-          </a>
-        </div>
+        <h2>Emergencias</h2>
 
-        <div class="footer-bottom">
-          <div class="footer-brand">
-            <div class="logo-icon"><i class="fa-solid fa-fire"></i></div>
-            <div>
-              <strong>FENIX · Red de Apoyo Durazno</strong>
-              <p>Una red vecinal para responder mejor cuando Durazno más nos necesita.</p>
-              <a href="mailto:equipo@fenixdurazno.uy" class="footer-email">equipo@fenixdurazno.uy &rarr;</a>
-            </div>
-          </div>
-          <div class="footer-copy">
-            <p>Hecho por vecinos, para vecinos.</p>
-            <small>Siempre verificá la información <i class="fa-regular fa-clock"></i></small>
-          </div>
-        </div>
-      </div>
+        <p>
+            <a href="tel:911">911 - Emergencias</a>
+        </p>
+
+        <p>
+            <a href="tel:104">104 - Bomberos</a>
+        </p>
+
+        <p>
+            <a href="tel:911">911 - Policía</a>
+        </p>
+
+        <h3>FENIX - Red de Apoyo Durazno</h3>
+
+        <p>
+            Una red vecinal para responder cuando Durazno nos necesita.
+        </p>
+
+        <p>
+            <a href="mailto:equipo@fenixdurazno.uy">
+                equipo@fenixdurazno.uy
+            </a>
+        </p>
+
     </footer>
-  </main>
 
-  <!-- MODAL: NECESITO AYUDA -->
-  <div class="modal-overlay" id="modal-ayuda">
-    <div class="modal-body">
-      <button class="modal-close" onclick="closeModal('modal-ayuda')">&times;</button>
-      <h2 class="title-condensed-sm text-orange">SOLICITAR ASISTENCIA</h2>
-      <p>Completá los datos básicos para que el equipo o un voluntario cercano se ponga en contacto.</p>
-      <form id="form-ayuda" onsubmit="handleFormSubmit(event, 'Solicitud recibida. Te contactaremos pronto.')">
-        <div class="form-group">
-          <label for="nombre-ayuda">Nombre completo</label>
-          <input type="text" id="nombre-ayuda" required placeholder="Ej. María Rodríguez">
-        </div>
-        <div class="form-group">
-          <label for="tel-ayuda">Teléfono / WhatsApp de contacto</label>
-          <input type="tel" id="tel-ayuda" required placeholder="099 123 456">
-        </div>
-        <div class="form-group">
-          <label for="tipo-ayuda">¿Qué tipo de ayuda necesitás?</label>
-          <select id="tipo-ayuda" required>
-            <option value="">Seleccionar opción...</option>
-            <option value="refugio">Refugio / Alojamiento</option>
-            <option value="traslado">Traslado de evacuación</option>
-            <option value="alimentos">Alimentos y Agua</option>
-            <option value="ropa">Ropa / Frazadas</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="ubicacion-ayuda">Ubicación / Barrio en Durazno</label>
-          <input type="text" id="ubicacion-ayuda" required placeholder="Ej. Barrio Varona, calle x">
-        </div>
-        <button type="submit" class="btn-hero-orange w-100">ENVIAR SOLICITUD URGENTE</button>
-      </form>
-    </div>
-  </div>
 
-  <!-- MODAL: QUIERO AYUDAR -->
-  <div class="modal-overlay" id="modal-donar">
-    <div class="modal-body">
-      <button class="modal-close" onclick="closeModal('modal-donar')">&times;</button>
-      <h2 class="title-condensed-sm text-yellow-dark">OFRECER COLABORACIÓN</h2>
-      <p>Gracias por sumar tu mano a la red FENIX.</p>
-      <form id="form-donar" onsubmit="handleFormSubmit(event, '¡Gracias por tu apoyo! Nos comunicaremos a la brevedad.')">
-        <div class="form-group">
-          <label for="nombre-donar">Tu Nombre / Organización</label>
-          <input type="text" id="nombre-donar" required placeholder="Ej. Juan Pérez">
-        </div>
-        <div class="form-group">
-          <label for="tel-donar">Teléfono de contacto</label>
-          <input type="tel" id="tel-donar" required placeholder="098 765 432">
-        </div>
-        <div class="form-group">
-          <label for="tipo-donar">¿Cómo podés colaborar?</label>
-          <select id="tipo-donar" required>
-            <option value="">Seleccionar recurso...</option>
-            <option value="transporte">Vehículo / Traslado 4x4</option>
-            <option value="insumos">Agua / Alimentos / Frazadas</option>
-            <option value="alojamiento">Espacio / Alojamiento temporal</option>
-            <option value="voluntario">Voluntario en centro de acopio</option>
-          </select>
-        </div>
-        <button type="submit" class="btn-dark-primary w-100">REGISTRAR MI AYUDA</button>
-      </form>
-    </div>
-  </div>
+    <script src="/js/script.js"></script>
 
-  <!-- Scripts: Leaflet JS y script.js nativo -->
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script src="public/js/script.js"></script>
 </body>
+
 </html>
