@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FENIX - Red de Apoyo Durazno</title>
+    <link rel="stylesheet" href="/css/estilos.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>FENIX</h1>
+        <p>Red de Apoyo Durazno</p>
+
+        <nav>
+            <a href="#inicio">Inicio</a>
+            <a href="#ayuda">Necesito ayuda</a>
+            <a href="#donar">Quiero ayudar</a>
+            <a href="#refugios">Refugios</a>
+            <a href="#contacto">Contacto</a>
+        </nav>
+    </header>
+
+    <main>
+
+        <section id="inicio">
+            <h2>Juntos por la Comunidad</h2>
+
+            <p>
+                FENIX conecta a las personas afectadas con vecinos,
+                recursos y refugios seguros.
+            </p>
+
+            <a href="#ayuda">Necesito ayuda</a>
+            <a href="#refugios">Ver refugios</a>
+        </section>
+
+
+        <section>
+            <h2>Acá nadie está solo</h2>
+
+            <p>
+                Todos podemos necesitar ayuda o ayudar a otra persona.
+            </p>
+
+            <h3>Necesito ayuda</h3>
+
+            <p>
+                Pedí traslado, refugio, alimentos o asistencia.
+            </p>
+
+            <a href="#ayuda">Pedir ayuda</a>
+
+            <h3>Quiero ayudar</h3>
+
+            <p>
+                Podés colaborar con un vehículo, alimentos,
+                alojamiento o tu tiempo.
+            </p>
+
+            <a href="#donar">Quiero ayudar</a>
+        </section>
+        
+        <section id="refugios">
+            <h2>Refugios</h2>
+
+            <p>
+                Estos son los refugios disponibles.
+            </p>
+
+            <div id="lista-refugios">
+                <p>Cargando refugios...</p>
+            </div>
+        </section>
+
+
+        <section id="ayuda">
+            <h2>Necesito ayuda</h2>
+
+            <p>
+                Contanos qué necesitás y nos pondremos en contacto.
+            </p>
+
+            <form id="form-ayuda"
+                  onsubmit="handleFormSubmit(event, 'Solicitud recibida. Te contactaremos pronto.')">
+
+                <label for="nombre-ayuda">Nombre</label>
+                <br>
+                <input
+                    type="text"
+                    id="nombre-ayuda"
+                    name="nombre"
+                    required
+                >
+                <br><br>
+
+                <label for="tel-ayuda">Teléfono</label>
+                <br>
+                <input
+                    type="tel"
+                    id="tel-ayuda"
+                    name="telefono"
+                    required
+                >
+                <br><br>
+
+                <label for="tipo-ayuda">Tipo de ayuda</label>
+                <br>
+                <select id="tipo-ayuda" name="tipo_ayuda" required>
+                    <option value="">Seleccionar</option>
+                    <option value="refugio">Refugio</option>
+                    <option value="traslado">Traslado</option>
+                    <option value="alimentos">Alimentos y agua</option>
+                    <option value="ropa">Ropa y frazadas</option>
+                    <option value="acompanamiento">Acompañamiento</option>
+                </select>
+                <br><br>
+
+                <label for="ubicacion-ayuda">Ubicación</label>
+                <br>
+                <input
+                    type="text"
+                    id="ubicacion-ayuda"
+                    name="ubicacion"
+                    required
+                >
+                <br><br>
+
+                <button type="submit">
+                    Enviar solicitud
+                </button>
+
+            </form>
+        </section>
+
+
+        <section id="donar">
+            <h2>Quiero ayudar</h2>
+
+            <p>
+                Registrá cómo podés colaborar.
+            </p>
+
+            <form id="form-donar"
+                  onsubmit="handleFormSubmit(event, '¡Gracias por tu apoyo! Nos comunicaremos a la brevedad.')">
+
+                <label for="nombre-donar">Nombre</label>
+                <br>
+                <input
+                    type="text"
+                    id="nombre-donar"
+                    name="nombre"
+                    required
+                >
+                <br><br>
+
+                <label for="tel-donar">Teléfono</label>
+                <br>
+                <input
+                    type="tel"
+                    id="tel-donar"
+                    name="telefono"
+                    required
+                >
+                <br><br>
+
+                <label for="tipo-donar">¿Cómo podés ayudar?</label>
+                <br>
+                <select id="tipo-donar" name="tipo" required>
+                    <option value="">Seleccionar</option>
+                    <option value="transporte">Vehículo / Traslado</option>
+                    <option value="insumos">Agua / Alimentos / Frazadas</option>
+                    <option value="alojamiento">Alojamiento</option>
+                    <option value="voluntario">Voluntario</option>
+                </select>
+                <br><br>
+
+                <button type="submit">
+                    Registrar mi ayuda
+                </button>
+
+            </form>
+        </section>
+    </main>
+
+
+    <footer id="contacto">
+
+        <h2>Emergencias</h2>
+
+        <p>
+            <a href="tel:911">911 - Emergencias</a>
+        </p>
+
+        <p>
+            <a href="tel:104">104 - Bomberos</a>
+        </p>
+
+        <p>
+            <a href="tel:911">911 - Policía</a>
+        </p>
+
+        <h3>FENIX - Red de Apoyo Durazno</h3>
+
+        <p>
+            Una red vecinal para responder cuando Durazno nos necesita.
+        </p>
+
+        <p>
+            <a href="mailto:equipo@fenixdurazno.uy">
+                equipo@fenixdurazno.uy
+            </a>
+        </p>
+
+    </footer>
+
+
+    <script src="/js/script.js"></script>
+
+</body>
+
+</html>

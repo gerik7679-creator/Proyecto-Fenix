@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="robots" content="noindex, nofollow">
+
+    <title>FENIX - Panel de Administración</title>
+
+    <!-- Iconos -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    >
+
+    <!-- Estilos -->
+    <link rel="stylesheet" href="/css/estilos.css">
+</head>
+
+<body>
+
+    <!-- =====================================================
+         BARRA SUPERIOR
+         ===================================================== -->
+
+    <header class="admin-navbar">
+
+        <div class="logo">
+
+            <div class="logo-icon">
+                <i class="fa-solid fa-fire"></i>
+            </div>
+
+            <div class="logo-text">
+                <span class="brand-name">FENIX</span>
+                <span class="brand-sub">
+                    COORDINACIÓN Y CONTROL
+                </span>
+            </div>
+
+        </div>
+
+
+        <div>
+
+            <span>
+                <i class="fa-solid fa-user-shield"></i>
+                Operador:
+                <strong>Administrador</strong>
+            </span>
+
+            <a href="/" class="btn-topbar-emergencia">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                Salir
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         CONTENEDOR PRINCIPAL
+         ===================================================== -->
+
+    <div class="admin-layout">
+
+
+        <!-- =================================================
+             MENÚ LATERAL
+             ================================================= -->
+
+        <aside class="admin-sidebar">
+
+            <ul class="admin-menu">
+
+                <li>
+                    <a href="#resumen" class="active">
+                        <i class="fa-solid fa-chart-line"></i>
+                        Resumen general
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#solicitudes">
+                        <i class="fa-solid fa-hand-holding-heart"></i>
+                        Solicitudes
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#refugios">
+                        <i class="fa-solid fa-house"></i>
+                        Refugios
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#recursos">
+                        <i class="fa-solid fa-box-open"></i>
+                        Recursos
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#voluntarios">
+                        <i class="fa-solid fa-users"></i>
+                        Voluntarios
+                    </a>
+                </li>
+
+            </ul>
+
+        </aside>
+
+
+        <!-- =================================================
+             CONTENIDO
+             ================================================= -->
+
+        <main>
+
+
+            <!-- =============================================
+                 RESUMEN
+                 ============================================= -->
+
+            <section class="panel-card" id="resumen">
+
+                <h2>ESTADO EN TIEMPO REAL</h2>
+
+                <div class="stats-counter-grid">
+
+                    <div class="stat-box">
+
+                        <i class="fa-solid fa-clock"></i>
+
+                        <span class="stat-number">
+                            08
+                        </span>
+
+                        <span class="stat-label">
+                            Solicitudes pendientes
+                        </span>
+
+                    </div>
+
+
+                    <div class="stat-box">
+
+                        <i class="fa-solid fa-house"></i>
+
+                        <span class="stat-number">
+                            91 / 190
+                        </span>
+
+                        <span class="stat-label">
+                            Capacidad de refugios
+                        </span>
+
+                    </div>
+
+
+                    <div class="stat-box">
+
+                        <i class="fa-solid fa-box-open"></i>
+
+                        <span class="stat-number">
+                            14
+                        </span>
+
+                        <span class="stat-label">
+                            Recursos ofrecidos
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =============================================
+                 SOLICITUDES
+                 ============================================= -->
+
+            <section class="panel-card" id="solicitudes">
+
+                <h3>
+                    SOLICITUDES DE AYUDA
+                </h3>
+
+                <p>
+                    Pedidos recibidos recientemente.
+                </p>
+
+                <div class="table-container">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Persona</th>
+                                <th>Ayuda</th>
+                                <th>Ubicación</th>
+                                <th>Estado</th>
+                                <th>Acción</th>
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody>
+
+                            <tr>
+
+                                <td>
+                                    Hace 5 min
+                                </td>
+
+                                <td>
+                                    <strong>Ana Gómez</strong>
+                                    <br>
+                                    <small>099 888 777</small>
+                                </td>
+
+                                <td>
+                                    <span class="pill-status pill-orange">
+                                        Traslado
+                                    </span>
+                                </td>
+
+                                <td>
+                                    Barrio Varona
+                                </td>
+
+                                <td>
+                                    <span class="pill-status pill-orange">
+                                        Pendiente
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <button
+                                        type="button"
+                                        class="btn-sm btn-green"
+                                        onclick="alert('Solicitud asignada.')"
+                                    >
+                                        Atender
+                                    </button>
+                                </td>
+
+                            </tr>
+
+
+                            <tr>
+
+                                <td>
+                                    Hace 18 min
+                                </td>
+
+                                <td>
+                                    <strong>Carlos Ruiz</strong>
+                                    <br>
+                                    <small>098 112 233</small>
+                                </td>
+
+                                <td>
+                                    <span class="pill-status pill-green">
+                                        Alimentos
+                                    </span>
+                                </td>
+
+                                <td>
+                                    Cobusu
+                                </td>
+
+                                <td>
+                                    <span class="pill-status pill-green">
+                                        En proceso
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <button
+                                        type="button"
+                                        class="btn-sm btn-orange"
+                                        onclick="alert('Solicitud finalizada.')"
+                                    >
+                                        Finalizar
+                                    </button>
+                                </td>
+
+                            </tr>
+
+
+                            <tr>
+
+                                <td>
+                                    Hace 32 min
+                                </td>
+
+                                <td>
+                                    <strong>María Rodríguez</strong>
+                                    <br>
+                                    <small>099 456 789</small>
+                                </td>
+
+                                <td>
+                                    <span class="pill-status pill-orange">
+                                        Refugio
+                                    </span>
+                                </td>
+
+                                <td>
+                                    Barrio Durán
+                                </td>
+
+                                <td>
+                                    <span class="pill-status pill-orange">
+                                        Pendiente
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <button
+                                        type="button"
+                                        class="btn-sm btn-green"
+                                        onclick="alert('Solicitud asignada.')"
+                                    >
+                                        Atender
+                                    </button>
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =============================================
+                 REFUGIOS
+                 ============================================= -->
+
+            <section class="panel-card" id="refugios">
+
+                <h3>
+                    ESTADO DE REFUGIOS
+                </h3>
+
+                <p>
+                    Actualizá la cantidad de personas que se
+                    encuentran actualmente en cada refugio.
+                </p>
+
+
+                <div class="table-container">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+                                <th>Refugio</th>
+                                <th>Ocupación</th>
+                                <th>Capacidad</th>
+                                <th>Estado</th>
+                                <th>Acción</th>
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody>
+
+                            <tr>
+
+                                <td>
+                                    <strong>
+                                        Club Centro Unión
+                                    </strong>
+                                </td>
+
+                                <td>
+
+                                    <input
+                                        type="number"
+                                        value="34"
+                                        min="0"
+                                        max="60"
+                                    >
+
+                                </td>
+
+                                <td>
+                                    60 personas
+                                </td>
+
+                                <td>
+
+                                    <span class="pill-status pill-green">
+                                        Disponible
+                                    </span>
+
+                                </td>
+
+                                <td>
+
+                                    <button
+                                        type="button"
+                                        class="btn-sm btn-green"
+                                        onclick="alert('Capacidad actualizada.')"
+                                    >
+                                        Guardar
+                                    </button>
+
+                                </td>
+
+                            </tr>
+
+
+                            <tr>
+
+                                <td>
+                                    <strong>
+                                        Liceo N.º 1
+                                    </strong>
+                                </td>
+
+                                <td>
+
+                                    <input
+                                        type="number"
+                                        value="12"
+                                        min="0"
+                                        max="80"
+                                    >
+
+                                </td>
+
+                                <td>
+                                    80 personas
+                                </td>
+
+                                <td>
+
+                                    <span class="pill-status pill-green">
+                                        Disponible
+                                    </span>
+
+                                </td>
+
+                                <td>
+
+                                    <button
+                                        type="button"
+                                        class="btn-sm btn-green"
+                                        onclick="alert('Capacidad actualizada.')"
+                                    >
+                                        Guardar
+                                    </button>
+
+                                </td>
+
+                            </tr>
+
+
+                            <tr>
+
+                                <td>
+                                    <strong>
+                                        Centro Barrial
+                                    </strong>
+                                </td>
+
+                                <td>
+
+                                    <input
+                                        type="number"
+                                        value="38"
+                                        min="0"
+                                        max="50"
+                                    >
+
+                                </td>
+
+                                <td>
+                                    50 personas
+                                </td>
+
+                                <td>
+
+                                    <span class="pill-status pill-orange">
+                                        Alta ocupación
+                                    </span>
+
+                                </td>
+
+                                <td>
+
+                                    <button
+                                        type="button"
+                                        class="btn-sm btn-green"
+                                        onclick="alert('Capacidad actualizada.')"
+                                    >
+                                        Guardar
+                                    </button>
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =============================================
+                 RECURSOS
+                 ============================================= -->
+
+            <section class="panel-card" id="recursos">
+
+                <h3>
+                    RECURSOS OFRECIDOS
+                </h3>
+
+                <p>
+                    Personas y organizaciones que ofrecieron
+                    recursos para la red.
+                </p>
+
+
+                <div class="table-container">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+                                <th>Persona</th>
+                                <th>Contacto</th>
+                                <th>Recurso</th>
+                                <th>Estado</th>
+                                <th>Acción</th>
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody>
+
+                            <tr>
+
+                                <td>
+                                    <strong>
+                                        Juan Pérez
+                                    </strong>
+                                </td>
+
+                                <td>
+                                    098 123 456
+                                </td>
+
+                                <td>
+                                    Vehículo 4x4
+                                </td>
+
+                                <td>
+
+                                    <span class="pill-status pill-green">
+                                        Disponible
+                                    </span>
+
+                                </td>
+
+                                <td>
+
+                                    <button
+                                        type="button"
+                                        class="btn-sm btn-green"
+                                        onclick="alert('Recurso asignado.')"
+                                    >
+                                        Asignar
+                                    </button>
+
+                                </td>
+
+                            </tr>
+
+
+                            <tr>
+
+                                <td>
+                                    <strong>
+                                        Ana López
+                                    </strong>
+                                </td>
+
+                                <td>
+                                    099 654 321
+                                </td>
+
+                                <td>
+                                    Agua potable
+                                </td>
+
+                                <td>
+
+                                    <span class="pill-status pill-green">
+                                        Disponible
+                                    </span>
+
+                                </td>
+
+                                <td>
+
+                                    <button
+                                        type="button"
+                                        class="btn-sm btn-green"
+                                        onclick="alert('Recurso asignado.')"
+                                    >
+                                        Asignar
+                                    </button>
+
+                                </td>
+
+                            </tr>
+
+
+                            <tr>
+
+                                <td>
+                                    <strong>
+                                        Club Deportivo
+                                    </strong>
+                                </td>
+
+                                <td>
+                                    099 111 222
+                                </td>
+
+                                <td>
+                                    20 colchones
+                                </td>
+
+                                <td>
+
+                                    <span class="pill-status pill-orange">
+                                        Pendiente
+                                    </span>
+
+                                </td>
+
+                                <td>
+
+                                    <button
+                                        type="button"
+                                        class="btn-sm btn-green"
+                                        onclick="alert('Recurso confirmado.')"
+                                    >
+                                        Confirmar
+                                    </button>
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =============================================
+                 VOLUNTARIOS
+                 ============================================= -->
+
+            <section class="panel-card" id="voluntarios">
+
+                <h3>
+                    VOLUNTARIOS ACTIVOS
+                </h3>
+
+                <p>
+                    Personas disponibles para colaborar.
+                </p>
+
+
+                <div class="table-container">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Contacto</th>
+                                <th>Área</th>
+                                <th>Disponibilidad</th>
+                                <th>Estado</th>
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody>
+
+                            <tr>
+
+                                <td>
+                                    <strong>
+                                        Pedro Silva
+                                    </strong>
+                                </td>
+
+                                <td>
+                                    099 222 333
+                                </td>
+
+                                <td>
+                                    Traslados
+                                </td>
+
+                                <td>
+                                    24 horas
+                                </td>
+
+                                <td>
+
+                                    <span class="pill-status pill-green">
+                                        Activo
+                                    </span>
+
+                                </td>
+
+                            </tr>
+
+
+                            <tr>
+
+                                <td>
+                                    <strong>
+                                        Laura Fernández
+                                    </strong>
+                                </td>
+
+                                <td>
+                                    098 444 555
+                                </td>
+
+                                <td>
+                                    Centro de acopio
+                                </td>
+
+                                <td>
+                                    Tarde
+                                </td>
+
+                                <td>
+
+                                    <span class="pill-status pill-green">
+                                        Activa
+                                    </span>
+
+                                </td>
+
+                            </tr>
+
+
+                            <tr>
+
+                                <td>
+                                    <strong>
+                                        Martín Rodríguez
+                                    </strong>
+                                </td>
+
+                                <td>
+                                    099 777 888
+                                </td>
+
+                                <td>
+                                    Distribución
+                                </td>
+
+                                <td>
+                                    Mañana
+                                </td>
+
+                                <td>
+
+                                    <span class="pill-status pill-orange">
+                                        Ocupado
+                                    </span>
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+
+        </main>
+
+    </div>
+
+
+    <!-- JavaScript -->
+    <script src="/js/admin.js"></script>
+
+</body>
+
+</html>
