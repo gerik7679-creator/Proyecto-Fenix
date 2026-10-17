@@ -1,0 +1,15 @@
+Options -Indexes
+DirectoryIndex index.html
+ErrorDocument 404 /404.html
+ErrorDocument 403 /404.html
+
+# Bloquea archivos ocultos y de respaldo, por si alguno termina en public/
+<FilesMatch "^\.|\.(env|sql|log|bak|md|yml|yaml|lock)$">
+    Require all denied
+</FilesMatch>
+
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>

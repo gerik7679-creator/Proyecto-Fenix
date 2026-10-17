@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FENIX - Red de Apoyo Durazno</title>
+    <link rel="stylesheet" href="/css/estilos.css">
+</head>
+<body>
+
+    <header>
+        <h1>FENIX</h1>
+        <p>Red de Apoyo Durazno</p>
+        <nav>
+            <a href="#inicio">Inicio</a>
+            <a href="#ayuda">Necesito ayuda</a>
+            <a href="#donar">Quiero ayudar</a>
+            <a href="#refugios">Refugios</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section id="inicio">
+            <h2>Unidos por Durazno</h2>
+            <p>Conectamos personas afectadas con recursos, vecinos y refugios seguros.</p>
+            
+            <div class="stats-grid">
+                <div class="card"><h3>Voluntarios</h3><p id="counter-voluntarios">-</p></div>
+                <div class="card"><h3>Refugios Abiertos</h3><p id="counter-refugios">-</p></div>
+                <div class="card"><h3>Pedidos Atendidos</h3><p id="counter-pedidos">-</p></div>
+            </div>
+        </section>
+
+        <section id="refugios">
+            <h2>Refugios Disponibles</h2>
+            <div id="lista-refugios"><p>Cargando refugios...</p></div>
+        </section>
+
+        <section id="ayuda">
+            <h2>Necesito Ayuda</h2>
+            <form id="form-ayuda">
+                <input type="text" name="nombre" placeholder="Tu nombre" required>
+                <input type="tel" name="telefono" placeholder="Teléfono" required>
+                <select name="tipo_ayuda" required>
+                    <option value="">Selecciona tipo de ayuda</option>
+                    <option value="refugio">Refugio</option>
+                    <option value="traslado">Traslado</option>
+                    <option value="alimentos">Alimentos y agua</option>
+                    <option value="ropa">Ropa y frazadas</option>
+                </select>
+                <input type="text" name="ubicacion" placeholder="Ubicación / Dirección" required>
+                <button type="submit">Enviar solicitud</button>
+            </form>
+            <p id="msg-ayuda" class="form-msg"></p>
+        </section>
+
+        <section id="donar">
+            <h2>Quiero Ayudar</h2>
+            <form id="form-donar">
+                <input type="text" name="nombre" placeholder="Tu nombre" required>
+                <input type="tel" name="telefono" placeholder="Teléfono" required>
+                <select name="tipo" required>
+                    <option value="">¿Cómo podés colaborar?</option>
+                    <option value="transporte">Vehículo / Traslado</option>
+                    <option value="insumos">Agua / Alimentos / Frazadas</option>
+                    <option value="alojamiento">Alojamiento</option>
+                    <option value="voluntario">Voluntario</option>
+                </select>
+                <button type="submit">Registrar colaboración</button>
+            </form>
+            <p id="msg-donar" class="form-msg"></p>
+        </section>
+    </main>
+
+    <footer>
+        <p>Emergencias: <strong>911</strong> | Bomberos: <strong>104</strong></p>
+        <p>&copy; FENIX Durazno</p>
+    </footer>
+
+    <script src="/js/script.js"></script>
+</body>
+</html>
