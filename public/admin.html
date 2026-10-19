@@ -4,28 +4,331 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FENIX - Panel de Administración</title>
-    <link rel="stylesheet" href="/css/estilos.css">
+    <style>
+        :root {
+            --primary: #d9534f;
+            --dark: #2c3e50;
+            --light: #f0f2f5;
+            --gray: #ccc;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .admin-header {
+            background-color: #1e293b;
+            padding: 1.5rem 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .admin-header-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .admin-header h1 {
+            font-size: 1.8rem;
+            color: #ffffff;
+            text-align: left;
+        }
+
+        .admin-header p {
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+
+        .btn-secondary {
+            background-color: #334155;
+            color: #ffffff !important;
+            padding: 8px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: background 0.2s;
+        }
+
+        .btn-secondary:hover {
+            background-color: #475569;
+        }
+
+        .admin-container {
+            max-width: 1100px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .admin-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-box {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            border-left: 4px solid var(--primary);
+        }
+
+        .stat-title {
+            font-size: 0.85rem;
+            color: #64748b;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #0f172a;
+            margin-top: 0.5rem;
+        }
+
+        .table-card {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        .table-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.2rem;
+            border-bottom: 1px solid #f1f5f9;
+            padding-bottom: 0.8rem;
+        }
+
+        .table-card-header h2 {
+            font-size: 1.25rem;
+            color: var(--primary);
+            margin-bottom: 0;
+        }
+
+        .badge {
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+
+        .badge-warning { background: #fef3c7; color: #d97706; }
+        .badge-success { background: #dcfce7; color: #15803d; }
+
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 0.5rem;
+        }
+
+        th {
+            background-color: #f8fafc;
+            color: #475569;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            padding: 12px 16px;
+            border-bottom: 2px solid #e2e8f0;
+            text-align: left;
+        }
+
+        td {
+            padding: 14px 16px;
+            border-bottom: 1px solid #f1f5f9;
+            color: #334155;
+            font-size: 0.95rem;
+        }
+
+        tr:hover td {
+            background-color: #f8fafc;
+        }
+
+        .loading-text {
+            color: #94a3b8;
+            font-style: italic;
+            padding: 1rem 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background-color: var(--dark);
+            color: white;
+            margin-top: 3rem;
+        }
+    </style>
 </head>
 <body class="admin-body">
 
-    <header>
-        <h1>Panel FENIX</h1>
-        <p>Gestión de Solicitudes y Colaboraciones</p>
-        <nav><a href="/index.html">Ver sitio web</a></nav>
+    <header class="admin-header">
+        <div class="admin-header-content">
+            <div>
+                <h1>Panel FENIX</h1>
+                <p>Gestión de Solicitudes y Colaboraciones</p>
+            </div>
+            <nav>
+                <a href="index.html" class="btn-secondary">Volver al sitio web</a>
+            </nav>
+        </div>
     </header>
 
-    <main class="container">
-        <section>
-            <h2>Solicitudes de Ayuda Recientes</h2>
-            <div id="tabla-solicitudes"><p>Cargando solicitudes...</p></div>
+    <main class="admin-container">
+        
+        <!-- Tarjetas de resumen rápido -->
+        <section class="admin-stats">
+            <div class="stat-box">
+                <span class="stat-title">Solicitudes Totales</span>
+                <span class="stat-number" id="counter-pedidos">-</span>
+            </div>
+            <div class="stat-box">
+                <span class="stat-title">Voluntarios Registrados</span>
+                <span class="stat-number" id="counter-voluntarios">-</span>
+            </div>
+            <div class="stat-box">
+                <span class="stat-title">Refugios Activos</span>
+                <span class="stat-number" id="counter-refugios">-</span>
+            </div>
         </section>
 
-        <section>
-            <h2>Colaboradores / Donaciones Registradas</h2>
-            <div id="tabla-donaciones"><p>Cargando donaciones...</p></div>
+        <!-- Tabla de Solicitudes -->
+        <section class="table-card">
+            <div class="table-card-header">
+                <h2>Solicitudes de Ayuda Recientes</h2>
+                <span class="badge badge-warning">En Espera</span>
+            </div>
+            <div class="table-wrapper" id="tabla-solicitudes">
+                <p class="loading-text">Cargando solicitudes...</p>
+            </div>
         </section>
+
+        <!-- Tabla de Donaciones -->
+        <section class="table-card">
+            <div class="table-card-header">
+                <h2>Colaboradores / Donaciones Registradas</h2>
+                <span class="badge badge-success">Confirmados</span>
+            </div>
+            <div class="table-wrapper" id="tabla-donaciones">
+                <p class="loading-text">Cargando donaciones...</p>
+            </div>
+        </section>
+
     </main>
 
-    <script src="/js/script.js"></script>
+    <footer>
+        <p>&copy; FENIX Durazno - Panel Interno</p>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // 1. Cargar estadísticas de contadores
+            fetch("/api/resumen.php")
+                .then(res => res.json())
+                .then(data => {
+                    if (document.getElementById("counter-voluntarios")) {
+                        document.getElementById("counter-voluntarios").textContent = data.voluntarios || 0;
+                    }
+                    if (document.getElementById("counter-refugios")) {
+                        document.getElementById("counter-refugios").textContent = data.refugios || 0;
+                    }
+                    if (document.getElementById("counter-pedidos")) {
+                        document.getElementById("counter-pedidos").textContent = data.pedidos || 0;
+                    }
+                })
+                .catch(() => console.error("Error cargando resumen"));
+
+            // 2. Cargar tabla de solicitudes
+            const tablaSolicitudes = document.getElementById("tabla-solicitudes");
+            if (tablaSolicitudes) {
+                fetch("/api/solicitudes.php")
+                    .then(res => res.json())
+                    .then(data => {
+                        if (!data || !data.length) {
+                            tablaSolicitudes.innerHTML = "<p class='loading-text'>No hay solicitudes registradas.</p>";
+                            return;
+                        }
+                        tablaSolicitudes.innerHTML = `
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Teléfono</th>
+                                        <th>Necesidad</th>
+                                        <th>Ubicación</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    ${data.map(s => `
+                                        <tr>
+                                            <td><strong>${s.nombre}</strong></td>
+                                            <td>${s.telefono}</td>
+                                            <td><span class="badge badge-warning">${s.tipo_ayuda}</span></td>
+                                            <td>${s.ubicacion}</td>
+                                        </tr>
+                                    `).join("")}
+                                </tbody>
+                            </table>
+                        `;
+                    })
+                    .catch(() => tablaSolicitudes.innerHTML = "<p class='loading-text'>Error al cargar solicitudes.</p>");
+            }
+
+            // 3. Cargar tabla de donaciones
+            const tablaDonaciones = document.getElementById("tabla-donaciones");
+            if (tablaDonaciones) {
+                fetch("/api/donaciones.php")
+                    .then(res => res.json())
+                    .then(data => {
+                        if (!data || !data.length) {
+                            tablaDonaciones.innerHTML = "<p class='loading-text'>No hay colaboradores registrados.</p>";
+                            return;
+                        }
+                        tablaDonaciones.innerHTML = `
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Teléfono</th>
+                                        <th>Aporte</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    ${data.map(d => `
+                                        <tr>
+                                            <td><strong>${d.nombre}</strong></td>
+                                            <td>${d.telefono}</td>
+                                            <td><span class="badge badge-success">${d.tipo}</span></td>
+                                        </tr>
+                                    `).join("")}
+                                </tbody>
+                            </table>
+                        `;
+                    })
+                    .catch(() => tablaDonaciones.innerHTML = "<p class='loading-text'>Error al cargar donaciones.</p>");
+            }
+        });
+    </script>
 </body>
 </html>
