@@ -8,6 +8,9 @@
 </head>
 <body>
 
+    <!-- CAPA DEL FONDO ANIMADO CON RAYOS NEÓN -->
+    <div class="neon-bg-lines"></div>
+
     <!-- Barra de Navegación -->
     <header class="navbar">
         <div class="nav-container">
@@ -289,7 +292,6 @@
         }
 
         function inicializarFormularios() {
-            // Formulario de Ayuda
             const formAyuda = document.getElementById("form-ayuda");
             if (formAyuda) {
                 formAyuda.addEventListener("submit", async (e) => {
@@ -327,7 +329,6 @@
                 });
             }
 
-            // Formulario de Donaciones
             const formDonar = document.getElementById("form-donar");
             if (formDonar) {
                 formDonar.addEventListener("submit", async (e) => {
