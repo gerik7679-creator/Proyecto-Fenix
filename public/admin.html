@@ -166,6 +166,22 @@
             background-color: #f8fafc;
         }
 
+        .btn-delete {
+            background-color: #ef4444;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-delete:hover {
+            background-color: #dc2626;
+        }
+
         .loading-text {
             color: #94a3b8;
             font-style: italic;
@@ -197,7 +213,7 @@
 
     <main class="admin-container">
         
-        <!-- Tarjetas de resumen rápido -->
+        <!-- Tarjetas de resumen -->
         <section class="admin-stats">
             <div class="stat-box">
                 <span class="stat-title">Solicitudes Totales</span>
@@ -243,92 +259,127 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            // 1. Cargar estadísticas de contadores
+            cargarResumen();
+            cargarSolicitudes();
+            cargarDonaciones();
+        });
+
+        function cargarResumen() {
             fetch("/api/resumen.php")
                 .then(res => res.json())
                 .then(data => {
-                    if (document.getElementById("counter-voluntarios")) {
-                        document.getElementById("counter-voluntarios").textContent = data.voluntarios || 0;
-                    }
-                    if (document.getElementById("counter-refugios")) {
-                        document.getElementById("counter-refugios").textContent = data.refugios || 0;
-                    }
-                    if (document.getElementById("counter-pedidos")) {
-                        document.getElementById("counter-pedidos").textContent = data.pedidos || 0;
-                    }
+                    if (document.getElementById("counter-voluntarios")) document.getElementById("counter-voluntarios").textContent = data.voluntarios || 0;
+                    if (document.getElementById("counter-refugios")) document.getElementById("counter-refugios").textContent = data.refugios || 0;
+                    if (document.getElementById("counter-pedidos")) document.getElementById("counter-pedidos").textContent = data.pedidos || 0;
                 })
                 .catch(() => console.error("Error cargando resumen"));
+        }
 
-            // 2. Cargar tabla de solicitudes
+        function cargarSolicitudes() {
             const tablaSolicitudes = document.getElementById("tabla-solicitudes");
-            if (tablaSolicitudes) {
-                fetch("/api/solicitudes.php")
-                    .then(res => res.json())
-                    .then(data => {
-                        if (!data || !data.length) {
-                            tablaSolicitudes.innerHTML = "<p class='loading-text'>No hay solicitudes registradas.</p>";
-                            return;
-                        }
-                        tablaSolicitudes.innerHTML = `
-                            <table>
-                                <thead>
+            fetch("/api/solicitudes.php")
+                .then(res => res.json())
+                .then(data => {
+                    if (!data || !data.length) {
+                        tablaSolicitudes.innerHTML = "<p class='loading-text'>No hay solicitudes registradas.</p>";
+                        return;
+                    }
+                    tablaSolicitudes.innerHTML = `
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Teléfono</th>
+                                    <th>Necesidad</th>
+                                    <th>Ubicación</th>
+                                    <th>Acción</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${data.map(s => `
                                     <tr>
-                                        <th>Nombre</th>
-                                        <th>Teléfono</th>
-                                        <th>Necesidad</th>
-                                        <th>Ubicación</th>
+                                        <td><strong>${s.nombre}</strong></td>
+                                        <td>${s.telefono}</td>
+                                        <td><span class="badge badge-warning">${s.tipo_ayuda}</span></td>
+                                        <td>${s.ubicacion}</td>
+                                        <td>
+                                            <button class="btn-delete" onclick="eliminarSolicitud(${s.id})">Eliminar</button>
+                                        </td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    ${data.map(s => `
-                                        <tr>
-                                            <td><strong>${s.nombre}</strong></td>
-                                            <td>${s.telefono}</td>
-                                            <td><span class="badge badge-warning">${s.tipo_ayuda}</span></td>
-                                            <td>${s.ubicacion}</td>
-                                        </tr>
-                                    `).join("")}
-                                </tbody>
-                            </table>
-                        `;
-                    })
-                    .catch(() => tablaSolicitudes.innerHTML = "<p class='loading-text'>Error al cargar solicitudes.</p>");
-            }
+                                `).join("")}
+                            </tbody>
+                        </table>
+                    `;
+                })
+                .catch(() => tablaSolicitudes.innerHTML = "<p class='loading-text'>Error al cargar solicitudes.</p>");
+        }
 
-            // 3. Cargar tabla de donaciones
+        function cargarDonaciones() {
             const tablaDonaciones = document.getElementById("tabla-donaciones");
-            if (tablaDonaciones) {
-                fetch("/api/donaciones.php")
-                    .then(res => res.json())
-                    .then(data => {
-                        if (!data || !data.length) {
-                            tablaDonaciones.innerHTML = "<p class='loading-text'>No hay colaboradores registrados.</p>";
-                            return;
-                        }
-                        tablaDonaciones.innerHTML = `
-                            <table>
-                                <thead>
+            fetch("/api/donaciones.php")
+                .then(res => res.json())
+                .then(data => {
+                    if (!data || !data.length) {
+                        tablaDonaciones.innerHTML = "<p class='loading-text'>No hay colaboradores registrados.</p>";
+                        return;
+                    }
+                    tablaDonaciones.innerHTML = `
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Teléfono</th>
+                                    <th>Aporte</th>
+                                    <th>Acción</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${data.map(d => `
                                     <tr>
-                                        <th>Nombre</th>
-                                        <th>Teléfono</th>
-                                        <th>Aporte</th>
+                                        <td><strong>${d.nombre}</strong></td>
+                                        <td>${d.telefono}</td>
+                                        <td><span class="badge badge-success">${d.tipo}</span></td>
+                                        <td>
+                                            <button class="btn-delete" onclick="eliminarDonacion(${d.id})">Eliminar</button>
+                                        </td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    ${data.map(d => `
-                                        <tr>
-                                            <td><strong>${d.nombre}</strong></td>
-                                            <td>${d.telefono}</td>
-                                            <td><span class="badge badge-success">${d.tipo}</span></td>
-                                        </tr>
-                                    `).join("")}
-                                </tbody>
-                            </table>
-                        `;
-                    })
-                    .catch(() => tablaDonaciones.innerHTML = "<p class='loading-text'>Error al cargar donaciones.</p>");
+                                `).join("")}
+                            </tbody>
+                        </table>
+                    `;
+                })
+                .catch(() => tablaDonaciones.innerHTML = "<p class='loading-text'>Error al cargar donaciones.</p>");
+        }
+
+        async function eliminarSolicitud(id) {
+            if (!confirm("¿Seguro que querés eliminar esta solicitud?")) return;
+            try {
+                const res = await fetch(`/api/solicitudes.php?id=${id}`, { method: 'DELETE' });
+                if (res.ok) {
+                    cargarSolicitudes();
+                    cargarResumen();
+                } else {
+                    alert("No se pudo eliminar la solicitud.");
+                }
+            } catch {
+                alert("Error de conexión al intentar eliminar.");
             }
-        });
+        }
+
+        async function eliminarDonacion(id) {
+            if (!confirm("¿Seguro que querés eliminar esta donación?")) return;
+            try {
+                const res = await fetch(`/api/donaciones.php?id=${id}`, { method: 'DELETE' });
+                if (res.ok) {
+                    cargarDonaciones();
+                    cargarResumen();
+                } else {
+                    alert("No se pudo eliminar la donación.");
+                }
+            } catch {
+                alert("Error de conexión al intentar eliminar.");
+            }
+        }
     </script>
 </body>
 </html>

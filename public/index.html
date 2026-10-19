@@ -3,80 +3,368 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FENIX - Red de Apoyo Durazno</title>
-    <link rel="stylesheet" href="/css/estilos.css">
+    <title>FENIX - Red de Apoyo Emergente Durazno</title>
+    <link rel="stylesheet" href="css/estilos.css">
 </head>
 <body>
 
-    <header>
-        <h1>FENIX</h1>
-        <p>Red de Apoyo Durazno</p>
-        <nav>
-            <a href="#inicio">Inicio</a>
-            <a href="#ayuda">Necesito ayuda</a>
-            <a href="#donar">Quiero ayudar</a>
-            <a href="#refugios">Refugios</a>
-        </nav>
+    <!-- Barra de Navegación -->
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="#inicio" class="logo">
+                <span class="logo-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>
+                </span>
+                <span class="logo-text">FENIX</span>
+            </a>
+            <nav class="nav-links">
+                <a href="#inicio">Inicio</a>
+                <a href="#refugios">Refugios</a>
+                <a href="#ayuda">Solicitar Ayuda</a>
+                <a href="#donar">Colaborar</a>
+                <a href="#faq">Preguntas</a>
+                <a href="admin.html" class="btn-admin">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    Panel Admin
+                </a>
+            </nav>
+        </div>
     </header>
 
+    <!-- Banner Principal (Hero) -->
+    <section id="inicio" class="hero">
+        <div class="hero-content">
+            <span class="hero-badge">Uruguay &bull; Durazno</span>
+            <h1>Coordinación Unificada de Apoyo Solidario</h1>
+            <p>Conectamos de forma ágil y transparente a familias vulnerables con refugios, recursos básicos y la red de voluntarios locales.</p>
+            <div class="hero-buttons">
+                <a href="#ayuda" class="btn btn-primary">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+                    Necesito Asistencia
+                </a>
+                <a href="#donar" class="btn btn-secondary">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l8.72-8.72 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                    Quiero Ofrecer Ayuda
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tarjetas de Estadísticas -->
+    <section class="stats-section">
+        <div class="container stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon icon-blue">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                </div>
+                <div class="stat-info">
+                    <h3 id="counter-voluntarios">-</h3>
+                    <p>Voluntarios Activos</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon icon-red">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                </div>
+                <div class="stat-info">
+                    <h3 id="counter-refugios">-</h3>
+                    <p>Refugios Habilitados</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon icon-orange">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                </div>
+                <div class="stat-info">
+                    <h3 id="counter-pedidos">-</h3>
+                    <p>Solicitudes Registradas</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <main class="container">
-        <section id="inicio">
-            <h2>Unidos por Durazno</h2>
-            <p>Conectamos personas afectadas con recursos, vecinos y refugios seguros.</p>
-            
-            <div class="stats-grid">
-                <div class="card"><h3>Voluntarios</h3><p id="counter-voluntarios">-</p></div>
-                <div class="card"><h3>Refugios Abiertos</h3><p id="counter-refugios">-</p></div>
-                <div class="card"><h3>Pedidos Atendidos</h3><p id="counter-pedidos">-</p></div>
+
+        <!-- Números de Emergencia Directa -->
+        <section class="emergency-bar">
+            <div class="emergency-item">
+                <span class="emergency-label">Emergencia Nacional:</span>
+                <a href="tel:911" class="emergency-phone">911</a>
+            </div>
+            <div class="emergency-item">
+                <span class="emergency-label">Bomberos Durazno:</span>
+                <a href="tel:104" class="emergency-phone">104</a>
+            </div>
+            <div class="emergency-item">
+                <span class="emergency-label">CECOED Durazno:</span>
+                <a href="tel:43628400" class="emergency-phone">4362 8400</a>
             </div>
         </section>
 
-        <section id="refugios">
-            <h2>Refugios Disponibles</h2>
-            <div id="lista-refugios"><p>Cargando refugios...</p></div>
+        <!-- Sección de Refugios -->
+        <section id="refugios" class="section-card">
+            <div class="section-header">
+                <h2>Centros de Alojamiento y Refugios</h2>
+                <p>Puntos oficiales habilitados para resguardo, alimentación y asistencia temporal.</p>
+            </div>
+            <div id="lista-refugios" class="refugios-grid">
+                <p class="loading-text">Cargando centros disponibles...</p>
+            </div>
         </section>
 
-        <section id="ayuda">
-            <h2>Necesito Ayuda</h2>
-            <form id="form-ayuda">
-                <input type="text" name="nombre" placeholder="Tu nombre" required>
-                <input type="tel" name="telefono" placeholder="Teléfono" required>
-                <select name="tipo_ayuda" required>
-                    <option value="">Selecciona tipo de ayuda</option>
-                    <option value="refugio">Refugio</option>
-                    <option value="traslado">Traslado</option>
-                    <option value="alimentos">Alimentos y agua</option>
-                    <option value="ropa">Ropa y frazadas</option>
-                </select>
-                <input type="text" name="ubicacion" placeholder="Ubicación / Dirección" required>
-                <button type="submit">Enviar solicitud</button>
-            </form>
-            <p id="msg-ayuda" class="form-msg"></p>
+        <!-- Formularios Principales en 2 Columnas -->
+        <div class="forms-grid">
+            
+            <!-- Formulario Solicitud -->
+            <section id="ayuda" class="form-card card-ayuda">
+                <div class="form-card-header">
+                    <span class="form-badge badge-red">S.O.S</span>
+                    <h2>Solicitar Asistencia</h2>
+                    <p>Completa el formulario para que la red de apoyo organice la ayuda requerida.</p>
+                </div>
+                <form id="form-ayuda">
+                    <div class="form-group">
+                        <label>Nombre Completo</label>
+                        <input type="text" name="nombre" placeholder="Ej: Juan Pérez" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Teléfono o Celular de Contacto</label>
+                        <input type="tel" name="telefono" placeholder="Ej: 099 123 456" required>
+                    </div>
+                    <div class="form-group">
+                        <label>¿Qué tipo de asistencia necesitas?</label>
+                        <select name="tipo_ayuda" required>
+                            <option value="">Selecciona una prioridad</option>
+                            <option value="refugio">Alojamiento / Evacuación</option>
+                            <option value="traslado">Transporte / Traslado urgente</option>
+                            <option value="alimentos">Agua potable y Alimentos</option>
+                            <option value="ropa">Ropa, Calzado o Frazadas</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Ubicación / Dirección exacta</label>
+                        <input type="text" name="ubicacion" placeholder="Ej: Barrio Santa Bernardina, Calle X #1234" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Enviar Solicitud</button>
+                </form>
+                <p id="msg-ayuda" class="form-msg"></p>
+            </section>
+
+            <!-- Formulario Colaboración -->
+            <section id="donar" class="form-card card-donar">
+                <div class="form-card-header">
+                    <span class="form-badge badge-green">Colaborar</span>
+                    <h2>Ofrecer Colaboración</h2>
+                    <p>Registra tus recursos disponibles para coordinar la logística comunitaria.</p>
+                </div>
+                <form id="form-donar">
+                    <div class="form-group">
+                        <label>Nombre o Institución</label>
+                        <input type="text" name="nombre" placeholder="Ej: María Gómez / Comercio X" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Teléfono de Contacto</label>
+                        <input type="tel" name="telefono" placeholder="Ej: 098 765 432" required>
+                    </div>
+                    <div class="form-group">
+                        <label>¿De qué manera puedes ayudar?</label>
+                        <select name="tipo" required>
+                            <option value="">Selecciona tu aporte</option>
+                            <option value="transporte">Vehículo para traslado o carga</option>
+                            <option value="insumos">Donación de alimentos, agua o cobijas</option>
+                            <option value="alojamiento">Disponibilidad de espacio / alojamiento</option>
+                            <option value="voluntario">Voluntariado para tareas físicas / logística</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-success btn-block">Registrar Colaboración</button>
+                </form>
+                <p id="msg-donar" class="form-msg"></p>
+            </section>
+
+        </div>
+
+        <!-- Preguntas Frecuentes (FAQ) -->
+        <section id="faq" class="section-card">
+            <div class="section-header">
+                <h2>Preguntas Frecuentes y Guía de Acción</h2>
+                <p>Respuestas rápidas para actuar con calma y eficiencia ante emergencias.</p>
+            </div>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <h4>¿Cómo se procesa mi solicitud de ayuda?</h4>
+                    <p>Las solicitudes quedan registradas en tiempo real en el panel central y son asignadas a las brigadas de apoyo y refugios disponibles según prioridad y cercanía.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>¿Dónde debo entregar donaciones físicas?</h4>
+                    <p>Una vez registrado tu ofrecimiento, los coordinadores se pondrán en contacto para coordinar el retiro o indicarte el centro de acopio habilitado más cercano.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>¿Quién gestiona esta plataforma?</h4>
+                    <p>Plataforma impulsada como iniciativa comunitaria y colaborativa para centralizar la información de emergencia en el departamento de Durazno.</p>
+                </div>
+            </div>
         </section>
 
-        <section id="donar">
-            <h2>Quiero Ayudar</h2>
-            <form id="form-donar">
-                <input type="text" name="nombre" placeholder="Tu nombre" required>
-                <input type="tel" name="telefono" placeholder="Teléfono" required>
-                <select name="tipo" required>
-                    <option value="">¿Cómo podés colaborar?</option>
-                    <option value="transporte">Vehículo / Traslado</option>
-                    <option value="insumos">Agua / Alimentos / Frazadas</option>
-                    <option value="alojamiento">Alojamiento</option>
-                    <option value="voluntario">Voluntario</option>
-                </select>
-                <button type="submit">Registrar colaboración</button>
-            </form>
-            <p id="msg-donar" class="form-msg"></p>
-        </section>
     </main>
 
-    <footer>
-        <p>Emergencias: <strong>911</strong> | Bomberos: <strong>104</strong></p>
-        <p>&copy; FENIX Durazno</p>
+    <!-- Pie de Página -->
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-brand">
+                <div class="logo">
+                    <span class="logo-icon">🔥</span>
+                    <span class="logo-text">FENIX</span>
+                </div>
+                <p>Plataforma de contingencia y red solidaria comunitaria de Durazno.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Navegación</h4>
+                <a href="#inicio">Inicio</a>
+                <a href="#refugios">Refugios</a>
+                <a href="#ayuda">Necesito Ayuda</a>
+                <a href="#donar">Quiero Ayudar</a>
+                <a href="admin.html">Panel de Control</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; FENIX Durazno — Proyecto Comunitario &bull; Uruguay</p>
+        </div>
     </footer>
 
-    <script src="/js/script.js"></script>
+    <!-- Script Integrado Independiente (Mantiene sincronía total con la API) -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            cargarResumen();
+            cargarRefugios();
+            inicializarFormularios();
+        });
+
+        function cargarResumen() {
+            fetch("/api/resumen.php")
+                .then(res => res.json())
+                .then(data => {
+                    const elemVol = document.getElementById("counter-voluntarios");
+                    const elemRef = document.getElementById("counter-refugios");
+                    const elemPed = document.getElementById("counter-pedidos");
+
+                    if (elemVol) elemVol.textContent = data.voluntarios || 0;
+                    if (elemRef) elemRef.textContent = data.refugios || 0;
+                    if (elemPed) elemPed.textContent = data.pedidos || 0;
+                })
+                .catch(() => console.error("Error cargando contadores"));
+        }
+
+        function cargarRefugios() {
+            const listaRefugios = document.getElementById("lista-refugios");
+            if (!listaRefugios) return;
+
+            fetch("/api/refugios.php")
+                .then(res => res.json())
+                .then(data => {
+                    if (!data || !data.length) {
+                        listaRefugios.innerHTML = "<p class='loading-text'>No hay centros de acopio cargados actualmente.</p>";
+                        return;
+                    }
+                    listaRefugios.innerHTML = data.map(r => `
+                        <div class="refugio-card">
+                            <div class="refugio-card-body">
+                                <div class="refugio-icon">
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                                </div>
+                                <div>
+                                    <h4>${r.nombre}</h4>
+                                    <p class="refugio-dir">📍 ${r.ubicacion}</p>
+                                </div>
+                            </div>
+                            <div class="refugio-card-footer">
+                                <span>Capacidad estimada:</span>
+                                <strong>${r.capacidad} personas</strong>
+                            </div>
+                        </div>
+                    `).join("");
+                })
+                .catch(() => {
+                    listaRefugios.innerHTML = "<p class='loading-text'>Error al conectar con la lista de refugios.</p>";
+                });
+        }
+
+        function inicializarFormularios() {
+            // Formulario de Ayuda
+            const formAyuda = document.getElementById("form-ayuda");
+            if (formAyuda) {
+                formAyuda.addEventListener("submit", async (e) => {
+                    e.preventDefault();
+                    const btn = formAyuda.querySelector("button[type='submit']");
+                    const msg = document.getElementById("msg-ayuda");
+                    
+                    btn.disabled = true;
+                    btn.textContent = "Procesando...";
+
+                    const formData = new FormData(formAyuda);
+                    const data = Object.fromEntries(formData.entries());
+
+                    try {
+                        const res = await fetch("/api/solicitudes.php", {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify(data)
+                        });
+                        if (res.ok) {
+                            msg.className = "form-msg success";
+                            msg.textContent = "✓ Solicitud registrada con éxito. Un coordinador te contactará.";
+                            formAyuda.reset();
+                            cargarResumen();
+                        } else {
+                            throw new Error();
+                        }
+                    } catch {
+                        msg.className = "form-msg error";
+                        msg.textContent = "✕ Error al enviar datos. Revisa tu conexión.";
+                    } finally {
+                        btn.disabled = false;
+                        btn.textContent = "Enviar Solicitud";
+                    }
+                });
+            }
+
+            // Formulario de Donaciones
+            const formDonar = document.getElementById("form-donar");
+            if (formDonar) {
+                formDonar.addEventListener("submit", async (e) => {
+                    e.preventDefault();
+                    const btn = formDonar.querySelector("button[type='submit']");
+                    const msg = document.getElementById("msg-donar");
+
+                    btn.disabled = true;
+                    btn.textContent = "Procesando...";
+
+                    const formData = new FormData(formDonar);
+                    const data = Object.fromEntries(formData.entries());
+
+                    try {
+                        const res = await fetch("/api/donaciones.php", {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify(data)
+                        });
+                        if (res.ok) {
+                            msg.className = "form-msg success";
+                            msg.textContent = "✓ ¡Muchas gracias! Colaboración registrada en el sistema.";
+                            formDonar.reset();
+                            cargarResumen();
+                        } else {
+                            throw new Error();
+                        }
+                    } catch {
+                        msg.className = "form-msg error";
+                        msg.textContent = "✕ Ocurrió un problema al guardar la donación.";
+                    } finally {
+                        btn.disabled = false;
+                        btn.textContent = "Registrar Colaboración";
+                    }
+                });
+            }
+        }
+    </script>
 </body>
 </html>
