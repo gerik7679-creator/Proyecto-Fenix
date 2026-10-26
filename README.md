@@ -15,7 +15,7 @@ Plataforma web integral para la administración, monitoreo de capacidad en tiemp
 ├── controllers/
 │   ├── refugiosController.js   # Lógica de negocio para refugios
 │   └── solicitudesController.js # Lógica de negocio para solicitudes
-├── routes/
+├── routes/               
 │   ├── refugiosRoutes.js     # Endpoints de refugios
 │   └── solicitudesRoutes.js   # Endpoints de solicitudes
 ├── css/                      # Estilos de la interfaz web
