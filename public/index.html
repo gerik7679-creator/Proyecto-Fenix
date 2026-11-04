@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FENIX - Red de Apoyo Emergente Durazno</title>
-
-    <link rel="icon" type="image/png" href="img/fenix_logo.png">
     <link rel="stylesheet" href="css/estilos.css">
 </head>
 <body>
@@ -103,6 +101,26 @@
             <div class="emergency-item">
                 <span class="emergency-label">CECOED Durazno:</span>
                 <a href="tel:43628400" class="emergency-phone">4362 8400</a>
+            </div>
+        </section>
+
+        <!-- Botones de Comunicación Automática por WhatsApp -->
+        <section class="section-card" style="text-align: center; background: rgba(15, 23, 42, 0.85);">
+            <h3 style="color: #ffffff; margin-bottom: 8px;">Canal Directo de Coordinación Rápida</h3>
+            <p style="color: #94a3b8; font-size: 0.95rem; margin-bottom: 1.5rem;">Comunícate de forma instantánea con el centro de operaciones vía WhatsApp.</p>
+            <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+                <a href="https://wa.me/59899123456?text=Hola,%20necesito%20coordinar%20asistencia%20urgente%20a%20través%20de%20la%20Plataforma%20FENIX." 
+                   target="_blank" 
+                   class="btn" 
+                   style="background-color: #25d366; color: white;">
+                    💬 Chat Coordinación Ayuda
+                </a>
+                <a href="https://wa.me/59899123456?text=Hola,%20quiero%20ofrecer%20mi%20colaboración%20y%20recursos%20en%20la%20Plataforma%20FENIX." 
+                   target="_blank" 
+                   class="btn" 
+                   style="background-color: #25d366; color: white;">
+                    💬 Ofrecer Colaboración
+                </a>
             </div>
         </section>
 
@@ -236,7 +254,7 @@
         </div>
     </footer>
 
-    <!-- Script Integrado Independiente (Mantiene sincronía total con la API) -->
+    <!-- Script Integrado con Automatización de WhatsApp Post-Envío -->
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             cargarResumen();
@@ -314,8 +332,14 @@
                             body: JSON.stringify(data)
                         });
                         if (res.ok) {
+                            const telefonoCoordinador = "59899123456"; // Cambia por tu número real
+                            const textoWp = encodeURIComponent(`Hola, acabo de registrar una solicitud en FENIX. Mi nombre es ${data.nombre}, necesito ${data.tipo_ayuda} en la ubicación: ${data.ubicacion}.`);
+                            
                             msg.className = "form-msg success";
-                            msg.textContent = "✓ Solicitud registrada con éxito. Un coordinador te contactará.";
+                            msg.innerHTML = `✓ Solicitud registrada con éxito.<br>
+                                <a href="https://wa.me/${telefonoCoordinador}?text=${textoWp}" target="_blank" style="display:inline-block; margin-top:10px; background:#25d366; color:white; padding:8px 14px; border-radius:6px; text-decoration:none; font-weight:bold;">
+                                    📲 Enviar aviso inmediato por WhatsApp
+                                </a>`;
                             formAyuda.reset();
                             cargarResumen();
                         } else {
@@ -351,8 +375,14 @@
                             body: JSON.stringify(data)
                         });
                         if (res.ok) {
+                            const telefonoCoordinador = "59899123456"; // Cambia por tu número real
+                            const textoWp = encodeURIComponent(`Hola, quiero ofrecer colaboración en FENIX. Mi nombre/institución es ${data.nombre}, mi aporte es de tipo: ${data.tipo}.`);
+                            
                             msg.className = "form-msg success";
-                            msg.textContent = "✓ ¡Muchas gracias! Colaboración registrada en el sistema.";
+                            msg.innerHTML = `✓ ¡Muchas gracias! Colaboración registrada.<br>
+                                <a href="https://wa.me/${telefonoCoordinador}?text=${textoWp}" target="_blank" style="display:inline-block; margin-top:10px; background:#25d366; color:white; padding:8px 14px; border-radius:6px; text-decoration:none; font-weight:bold;">
+                                    📲 Enviar detalles por WhatsApp
+                                </a>`;
                             formDonar.reset();
                             cargarResumen();
                         } else {
